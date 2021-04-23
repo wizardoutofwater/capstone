@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Language.hasMany(models.Snippet, {
-        foreignKey: "language_Id",
+        foreignKey: "language_id",
       });
     }
   }
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Language",
+      modelName: "language",
     }
   );
   return Language;

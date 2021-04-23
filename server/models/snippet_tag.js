@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Snippet_Tag.belongsTo(models.Snippet, {
-        foreignKey: "snippet_Id",
+        foreignKey: "snippet_id",
       });
       models.Snippet_Tag.belongsTo(models.Tag, {
-        foreignKey: "tag_Id",
+        foreignKey: "tag_id",
       });
     }
   }
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Snippet_Tag",
+      modelName: "snippet_tag",
     }
   );
   return Snippet_Tag;
