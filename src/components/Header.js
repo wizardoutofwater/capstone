@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../logo.svg";
+import logo from "../folder.svg";
 
 const Header = () => {
   const _handleBurger = () => {
@@ -11,15 +11,15 @@ const Header = () => {
   };
   return (
     <div>
-      <nav className="navbar bg-mintCream">
+      <nav className="navbar ">
         <div className="navbar-brand">
           <div className="navbar-item" href="#">
             <img
               className="mr-2"
-              src="./photo-camera.svg"
-              alt="stylized point and shoot camera"
+              src={logo}
+              alt="snippit logo"
             />
-            evCALC
+            Snippit 
           </div>
           <div
             className="navbar-burger burger"
@@ -35,13 +35,13 @@ const Header = () => {
 
         <div id="navbarMenu" className="navbar-menu">
           <div className="navbar-end">
-            <a className="navbar-item" href="#theMath">
+            <a className="navbar-item is-hidden-tablet" href="#theMath">
               <span className="icon">
                 <i className="fas fa-info"></i>
               </span>
               <span>the Math</span>
             </a>
-            <a className="navbar-item" href="#evScaleInfo">
+            <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
               <span className="icon">
                 <i className="fas fa-bars"></i>
               </span>

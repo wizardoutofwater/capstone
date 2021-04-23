@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import './SideNav.css';
 
 class SideNav extends Component {
     render() {

@@ -1,8 +1,10 @@
 import React from 'react';
 import './css/App.css';
 import Header from './components/Header';
+import HeaderTest from './components/HeaderTest';
 import SideNav from './components/SideNav';
 import Main from './components/Main';
+import SideNavTest from './components/SideNavTest';
 
 
 function App() {
@@ -11,7 +13,7 @@ function App() {
     <Header />
     <div className ="section">
     <div className ="columns">
-      <SideNav />
+      <SideNavTest />
       <main className="column">
         <Main />
       </main>
