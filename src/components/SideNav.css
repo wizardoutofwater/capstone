@@ -1,0 +1,17 @@
+.side-nav {
+  padding-top: 0.2em;
+}
+
+.side-nav .menu-list > li {
+  text-align: left;
+}
+
+.side-nav nav {
+  position: relative;
+}
+
+.side-nav #navbarMenu {
+  position: absolute;
+  width: 50%;
+  right: 0px;
+}

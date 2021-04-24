@@ -3,3 +3,14 @@
       display: block;
     }
   } */
+
+
+.navbar nav {
+  position: relative;
+}
+
+.navbar #navbarMenu {
+  position: absolute;
+  width: 50%;
+  right: 0px;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../folder.svg";
+import './Header.css';
 
 const Header = () => {
   const _handleBurger = () => {
@@ -39,13 +40,19 @@ const Header = () => {
               <span className="icon">
                 <i className="fas fa-info"></i>
               </span>
-              <span>the Math</span>
+              <span>New Snippet</span>
             </a>
             <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
               <span className="icon">
                 <i className="fas fa-bars"></i>
               </span>
-              <span>EV Scale</span>
+              <span>Library</span>
+            </a>
+            <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
+              <span className="icon">
+                <i className="fas fa-bars"></i>
+              </span>
+              <span>Collections</span>
             </a>
             <a
               className="navbar-item"
@@ -54,7 +61,7 @@ const Header = () => {
               <span className="icon">
                 <i className="fas fa-file-alt"></i>
               </span>
-              <span>gitHub</span>
+              <span>Profile</span>
             </a>
           </div>
         </div>
