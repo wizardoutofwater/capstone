@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Snippet.belongsTo(models.User, {
-        foreignKey: user_id,
+        foreignKey: "user_id",
       });
       models.Snippet.belongsTo(models.Language, {
-        foreignKey: language_Id,
+        foreignKey: "language_id",
       });
       models.Snippet.belongsToMany(models.Tag, {
         through: "snippet_tag",
