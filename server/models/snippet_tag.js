@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Snippet_Tag extends Model {
+  class snippet_tag extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Snippet_Tag.belongsTo(models.Snippet, {
+      models.snippet_tag.belongsTo(models.snippet, {
         foreignKey: "snippet_id",
       });
-      models.Snippet_Tag.belongsTo(models.Tag, {
+      models.snippet_tag.belongsTo(models.tag, {
         foreignKey: "tag_id",
       });
     }
   }
-  Snippet_Tag.init(
+  snippet_tag.init(
     {
       snippet_Id: DataTypes.INTEGER,
       tag_Id: DataTypes.INTEGER,
@@ -27,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "snippet_tag",
     }
   );
-  return Snippet_Tag;
+  return snippet_tag;
 };
