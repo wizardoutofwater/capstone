@@ -1,38 +1,38 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Snippet extends Model {
+  class snippet extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      models.Snippet.belongsTo(models.User, {
-        foreignKey: user_id,
+      //define association here
+      models.snippet.belongsTo(models.user, {
+        foreignKey: "user_id",
       });
-      models.Snippet.belongsTo(models.Language, {
-        foreignKey: language_Id,
+      models.snippet.belongsTo(models.language, {
+        foreignKey: "language_id",
       });
-      models.Snippet.belongsToMany(models.Tag, {
+      models.snippet.belongsToMany(models.tag, {
         through: "snippet_tag",
         foreignKey: "snippet_id",
       });
     }
   }
-  Snippet.init(
+  snippet.init(
     {
       title: DataTypes.STRING,
       note: DataTypes.TEXT,
       snippet: DataTypes.TEXT,
-      language_Id: DataTypes.INTEGER,
-      user_Id: DataTypes.INTEGER,
+      language_id: DataTypes.INTEGER,
+      user_id: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "snippet",
     }
   );
-  return Snippet;
+  return snippet;
 };
