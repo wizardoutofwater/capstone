@@ -1,8 +1,12 @@
+require("dotenv").config();
+
 const express = require("express");
 const router = express.Router();
 const pbkdf2 = require("pbkdf2");
 const crypto = require("crypto");
 const db = require("../models");
+const jwt = require("jsonwebtoken");
+const authenticateToken = require("./helper/authenticateToken");
 router.use(express.json());
 
 // functions for create users and find users
@@ -36,8 +40,8 @@ router.post("/login", async (req, res) => {
   password = req.body.password;
 
   //find user
-  const foundUser = await findUserByEmail(email);
-  const userPassword = foundUser.password;
+  let foundUser = await findUserByEmail(email);
+  let userPassword = foundUser.password;
 
   if (!foundUser) {
     return res.status(401).json({
@@ -48,8 +52,9 @@ router.post("/login", async (req, res) => {
   let pass_parts = userPassword.split("$");
   let enteredPassword = encryptPassword(password, pass_parts[1]);
   if (enteredPassword == userPassword) {
+    const accessToken = jwt.sign(foundUser, process.env.ACCESS_TOKEN_SECRET);
     return res.status(200).json({
-      success: "logged in",
+      accessToken: accessToken,
     });
   } else {
     return res.status(404).json({
@@ -110,6 +115,10 @@ router.post("/signup", async (req, res) => {
         error: `${err}`,
       });
     });
+});
+
+router.get("/test", authenticateToken, (req, res) => {
+  return res.status(200).json(req.user);
 });
 
 module.exports = router;
