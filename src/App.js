@@ -1,12 +1,10 @@
-import React from 'react';
-import './css/App.css';
+import React, { useState, useEffect} from 'react';
+import { NavLink, Route, Switch } from 'react-router-dom';
+import './App.css';
 import Header from './components/Header';
-import HeaderTest from './components/HeaderTest';
-import SideNav from './components/SideNav';
-import Main from './components/Main';
-import SideNavTest from './components/SideNavTest';
-import { SignUp } from './pages/SignUp';
-import { Login } from './pages/Login';
+import  SignUp from './pages/SignUp';
+import  Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 
 function App() {
@@ -14,17 +12,26 @@ function App() {
     <div className="App">
     <Header />
     <div className ="section main-content">
-    <div className ="columns">
-      <SideNavTest />
-      <main className="column">
-        {/* <Main /> */}
-       <SignUp />
-      </main>
+    <Switch>
+          <Route exact path="/">
+            {/* <Landing /> */}
+            <h1>this will be the homePage</h1>
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+        </Switch>
+   
     </div>
 
     </div>
 
-    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Prism from "prismjs";
-import "../css/prism.css";
+import "../prism.css";
 
 export class Snippet extends Component {
   componentDidMount() {
@@ -9,7 +9,7 @@ export class Snippet extends Component {
 
   render() {
     return (
-      <div>
+      <div className='Snippet'> 
         <pre>
           <code className="language-javascript">
             {`

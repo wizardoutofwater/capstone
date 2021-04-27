@@ -1,19 +1,5 @@
-// import React, { Component } from "react";
-// import './Login.css';
-
-// export class Login extends Component {
-//   render() {
-//     return (
-//       <div className ="Login">
-
-//       </div>
-//     );
-//   }
-// }
-
-// export default Login;
-
 import React from "react";
+import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -57,11 +43,12 @@ function SignUp() {
                   “There are two hard things in computer science: cache
                   invalidation, naming things, and off-by-one errors.”
                 </p>
-                <p class="subtitle">Jeff Atwood</p>
+                <p className="subtitle">Jeff Atwood</p>
               </div>
             </div>
           </div>
-          <div className="column">
+          <div className="column ">
+          <div className="box">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="field has-text-left">
                 <label className="label">Email</label>
@@ -72,7 +59,7 @@ function SignUp() {
                     placeholder="e.g. ex@mple.com"
                   />
                 </div>
-                <p class="help is-danger">{errors.eMail?.message}</p>
+                <p className="help is-danger">{errors.eMail?.message}</p>
               </div>
 
               <div className="field has-text-left">
@@ -87,7 +74,7 @@ function SignUp() {
                   />
                 </div>
                 <p className="help">Use at least 8 characters and a mix of letters, numbers, and symbols</p>
-                <p class="help is-danger">{errors.password?.message}</p>
+                <p className="help is-danger">{errors.password?.message}</p>
               </div>
 
               <div className="field has-text-left ">
@@ -100,20 +87,21 @@ function SignUp() {
                     placeholder="********"
                   />
                 </div>
-                <p class="help is-danger">{errors.confirmPassword?.message}</p>
+                <p className="help is-danger">{errors.confirmPassword?.message}</p>
               </div>
 
               <button className="button is-primary">Sign Up</button>
               <hr />
               <p>
-                Already have an account? <a href="#">Log In</a>
+                Already have an account? <Link to="/login">Log In</Link>
               </p>
             </form>
           </div>
         </div>
       </div>
+      </div>
     </>
   );
 }
 
-export { SignUp };
+export default SignUp;

@@ -1,8 +1,12 @@
 import React from "react";
+import { NavLink, Link } from "react-router-dom";
 import logo from "../folder.svg";
-import './Header.css';
+import "./Header.css";
 
 const Header = () => {
+  // for testing conditional render  -- remove once done
+  let token = false;
+
   const _handleBurger = () => {
     const navBurger = document.getElementById("navBurger");
     const navbarMenu = document.getElementById("navbarMenu");
@@ -11,16 +15,12 @@ const Header = () => {
     navbarMenu.classList.toggle("is-active");
   };
   return (
-    <div >
-      <nav className="navbar" >
+    <div>
+      <nav className="navbar">
         <div className="navbar-brand">
-          <div className="navbar-item" href="#">
-            <img
-              className="mr-2"
-              src={logo}
-              alt="snippit logo"
-            />
-            Snippit 
+          <div className="navbar-item">
+            <img className="mr-2" src={logo} alt="snippit logo" />
+            Snippit
           </div>
           <div
             className="navbar-burger burger"
@@ -36,12 +36,12 @@ const Header = () => {
 
         <div id="navbarMenu" className="navbar-menu ">
           <div className="navbar-end">
-            <a className="navbar-item is-hidden-tablet" href="#theMath">
+            <Link to="/new" className="navbar-item is-hidden-tablet">
               <span className="icon">
                 <i className="far fa-plus-square"></i>
               </span>
               <span>New Snippet</span>
-            </a>
+            </Link>
             <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
               <span className="icon">
                 <i className="fas fa-code"></i>
@@ -54,25 +54,31 @@ const Header = () => {
               </span>
               <span>Collections</span>
             </a>
-        <hr className="navdivider"></hr>
-            <a
-              className="navbar-item"
-              href="http://github.com/wizardoutofwater/react-project"
-            >
-              <span className="icon">
-                <i className="far fa-user"></i>
-              </span>
-              <span>Profile</span>
-            </a>
-            <a
-              className="navbar-item"
-              href="http://github.com/wizardoutofwater/react-project"
-            >
-              <span className="icon">
-                <i className="fas fa-sign-out-alt"></i>
-              </span>
-              <span>Log Out</span>
-            </a>
+            <hr className="navdivider"></hr>
+{/* Is this Valid?  renders <span> inside of an <a> -- swictch to bulma-react-components and use renderAs props */}
+            {token && token !== "" ? (
+              <Link to="/dashboard" className="navbar-item">
+                <span className="icon">
+                  <i className="far fa-user"></i>
+                </span>
+                <span>Profile</span>
+              </Link>) : ( "" )}
+
+            {token && token !== "" ? (
+              <Link to="/logout" className="navbar-item">
+                <span className="icon">
+                  <i className="fas fa-sign-out-alt"></i>
+                </span>
+                <span>Log Out</span>
+              </Link>
+            ) : (
+              <Link to="/login" className="navbar-item">
+                <span className="icon">
+                  <i className="fas fa-sign-out-alt"></i>
+                </span>
+                <span>Log In</span>
+              </Link>
+            )}
           </div>
         </div>
       </nav>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -42,7 +43,7 @@ function Login() {
     <p className="title">
       “There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors.”
     </p>
-    <p class="subtitle">
+    <p className="subtitle">
       Jeff Atwood
     </p>
   </div>
@@ -66,7 +67,7 @@ function Login() {
 
   <button className="button is-primary">Sign In</button>
   <hr/>
-  <p>New Here? <a href="#">Sign Up</a></p>
+  <p>New Here? <Link to="/signup">Sign Up</Link></p>
 </form>
 </div>
 </div>
@@ -75,4 +76,4 @@ function Login() {
     )
 }
 
-export { Login };
+export default Login;
