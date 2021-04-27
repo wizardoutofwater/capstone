@@ -1,24 +1,24 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("Snippet_Tags", {
+    await queryInterface.createTable("snippet_tags", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      snippet_Id: {
+      snippet_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Snippets",
+          model: "snippets",
           key: "id",
         },
       },
-      tag_Id: {
+      tag_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Tags",
+          model: "tags",
           key: "id",
         },
       },
