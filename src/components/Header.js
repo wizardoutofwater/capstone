@@ -11,8 +11,8 @@ const Header = () => {
     navbarMenu.classList.toggle("is-active");
   };
   return (
-    <div>
-      <nav className="navbar ">
+    <div >
+      <nav className="navbar" >
         <div className="navbar-brand">
           <div className="navbar-item" href="#">
             <img
@@ -34,34 +34,44 @@ const Header = () => {
           </div>
         </div>
 
-        <div id="navbarMenu" className="navbar-menu">
+        <div id="navbarMenu" className="navbar-menu ">
           <div className="navbar-end">
             <a className="navbar-item is-hidden-tablet" href="#theMath">
               <span className="icon">
-                <i className="fas fa-info"></i>
+                <i className="far fa-plus-square"></i>
               </span>
               <span>New Snippet</span>
             </a>
             <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
               <span className="icon">
-                <i className="fas fa-bars"></i>
+                <i className="fas fa-code"></i>
               </span>
               <span>Library</span>
             </a>
             <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
               <span className="icon">
-                <i className="fas fa-bars"></i>
+                <i className="fas fa-archive"></i>
               </span>
               <span>Collections</span>
+            </a>
+        <hr className="navdivider"></hr>
+            <a
+              className="navbar-item"
+              href="http://github.com/wizardoutofwater/react-project"
+            >
+              <span className="icon">
+                <i className="far fa-user"></i>
+              </span>
+              <span>Profile</span>
             </a>
             <a
               className="navbar-item"
               href="http://github.com/wizardoutofwater/react-project"
             >
               <span className="icon">
-                <i className="fas fa-file-alt"></i>
+                <i className="fas fa-sign-out-alt"></i>
               </span>
-              <span>Profile</span>
+              <span>Log Out</span>
             </a>
           </div>
         </div>

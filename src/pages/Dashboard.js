@@ -5,20 +5,19 @@ import HeaderTest from './components/HeaderTest';
 import SideNav from './components/SideNav';
 import Main from './components/Main';
 import SideNavTest from './components/SideNavTest';
-import { SignUp } from './pages/SignUp';
-import { Login } from './pages/Login';
 
 
-function App() {
+
+function Dashboard() {
   return (
-    <div className="App">
+    <div className="Dashboard">
     <Header />
     <div className ="section main-content">
     <div className ="columns">
       <SideNavTest />
       <main className="column">
-        {/* <Main /> */}
-       <SignUp />
+        <Main />
+       
       </main>
     </div>
 
@@ -28,4 +27,4 @@ function App() {
   );
 }
 
-export default App;
+export default Dashboard;
