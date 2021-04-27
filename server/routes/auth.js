@@ -6,7 +6,6 @@ const pbkdf2 = require("pbkdf2");
 const crypto = require("crypto");
 const db = require("../models");
 const jwt = require("jsonwebtoken");
-const authenticateToken = require("./helper/authenticateToken");
 router.use(express.json());
 
 // functions for create users and find users
@@ -115,10 +114,6 @@ router.post("/signup", async (req, res) => {
         error: `${err}`,
       });
     });
-});
-
-router.get("/test", authenticateToken, (req, res) => {
-  return res.status(200).json(req.user);
 });
 
 module.exports = router;
