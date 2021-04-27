@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 function SignUp() {
+  const [error, setError] = useState(null);
+
   // form validation rules
   const validationSchema = Yup.object().shape({
     eMail: Yup.string().required("Email is required").email("Email is invalid"),
@@ -26,9 +29,21 @@ function SignUp() {
   const { errors } = formState;
 
   function onSubmit(data) {
-    // display form data on success
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    return false;
+    //TEST -- display form data on success
+    // alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
+    // return false;
+    data = JSON.stringify(data);
+    console.log (data);
+    const headers = {
+      'Content-Type': 'application/json'
+    }
+    axios.post('https://localhost:3001/api/login', data, { headers })
+      .then(response => {
+        localStorage.setItem('user-token', response.token);
+        this.props.updateToken(response.token);
+        this.props.history.push('/dashboard');
+      })
+
   }
 
   return (

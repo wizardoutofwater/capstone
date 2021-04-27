@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../folder.svg";
 import "./Header.css";
 
-const Header = () => {
+function Header() {
   // for testing conditional render  -- remove once done
   let token = false;
 

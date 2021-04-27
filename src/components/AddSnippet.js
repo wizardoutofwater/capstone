@@ -14,6 +14,7 @@ class AddSnippet extends Component {
   render() {
     return (
       <div>
+      {/* maybe swap this component for a different code editor */}
         <Editor
           value={this.state.code}
           onValueChange={(code) => this.setState({ code })}

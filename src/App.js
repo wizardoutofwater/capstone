@@ -8,17 +8,27 @@ import Dashboard from './pages/Dashboard';
 
 
 function App() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    let token = localStorage.getItem('user-token');
+    if (token) {
+      setToken(token);
+    }
+  }, [])
+
   return (
     <div className="App">
-    <Header />
+    <Header token={token} />
     <div className ="section main-content">
     <Switch>
           <Route exact path="/">
             {/* <Landing /> */}
             <h1>this will be the homePage</h1>
           </Route>
-          <Route path="/login">
-            <Login />
+          <Route path="/login" render={(props) => (
+            <Login {...props} updateToken={setToken} />
+          )}>
           </Route>
           <Route path="/signup">
             <SignUp />
