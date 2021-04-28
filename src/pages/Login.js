@@ -14,7 +14,7 @@ function Login(props) {
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, reset, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
    const onSubmit= (data) => {
@@ -26,7 +26,7 @@ function Login(props) {
     };
     axios
       .post("http://localhost:3001/api/login", data, { headers })
-      .then(response => {
+      .then((response) => {
         console.log(response);
         localStorage.setItem("user-token", response.data.accessToken);
         props.updateToken(response.data.accessToken);

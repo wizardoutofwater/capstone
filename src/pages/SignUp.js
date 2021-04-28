@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-function SignUp() {
+function SignUp(props) {
   const [error, setError] = useState(null);
 
   // form validation rules
@@ -28,12 +28,8 @@ function SignUp() {
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  function onSubmit(data) {
-    // TEST -- display form data on success
-    // alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    // return false;
+  const onSubmit = (data) => {
     data = JSON.stringify(data);
-    console.log(data);
     const headers = {
       "Content-Type": "application/json",
     };
@@ -41,9 +37,9 @@ function SignUp() {
       .post("http://localhost:3001/api/signup", data, { headers })
       .then((response) => {
         console.log(response);
-        localStorage.setItem("user-token", response.token);
-        this.props.updateToken(response.token);
-        this.props.history.push("/dashboard");
+        localStorage.setItem("user-token", response.data.accessToken);
+        props.updateToken(response.data.accessToken);
+        props.history.push("/dashboard");
       });
   }
 

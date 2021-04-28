@@ -67,8 +67,8 @@ router.post("/signup", async (req, res) => {
   const emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const passwordFormat = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g;
   // grab email and lower case it and password
-  email = req.body.email.toLowerCase();
-  password = req.body.password;
+  let email = req.body.email.toLowerCase();
+  let password = req.body.password;
   // ensure email and password are filled out
   if (email === "" || req.body.password === "") {
     return res.status(401).json({
@@ -91,9 +91,10 @@ router.post("/signup", async (req, res) => {
   // check if user exists already
   const isUserAlready = await findUserByEmail(email);
   if (isUserAlready) {
-    return res.status(403).json({
-      error: "An account already exists with this email address",
-    });
+    return res.status(403).send('email already exists')
+    // return res.status(403).json({
+    //   error: "An account already exists with this email address",
+    // });
   }
 
   let encryptedPasword = encryptPassword(password);

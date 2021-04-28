@@ -1,5 +1,7 @@
 import { Component } from "react";
+import { NavLink } from 'react-router-dom'
 import Avatar from './Avatar';
+
 import "./SideNav.css";
 
 
@@ -11,22 +13,22 @@ class SideNav extends Component {
         <p className="menu-label is-hidden-touch">Navigation</p>
         <ul className="menu-list">
           <li>
-            <a href="#" className="">
+            <NavLink to="/dashboard/add" className="">
               <span className="icon">
                 <i className="far fa-plus-square"></i>
               </span>{" "}
               New Snippet
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#" className="">
+            <NavLink to="/dashboard/library" className="">
               <span className="icon">
                 <i className="fas fa-code"></i>
               </span>{" "}
               Library
-            </a>
+            </NavLink>
           </li>
-          <li>
+          {/* <li>
             <a href="#" className="">
               <span className="icon">
                 <i className="fas fa-archive"></i>
@@ -60,14 +62,14 @@ class SideNav extends Component {
                 </a>
               </li>
             </ul>
-          </li>
+          </li> */}
           <li>
-            <a href="#" className="">
+            <NavLink to="/dashboard/search" className="">
               <span className="icon">
                 <i className="fas fa-search"></i>
               </span>{" "}
               Search
-            </a>
+            </NavLink>
           </li>
         </ul>
       </aside>

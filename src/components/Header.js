@@ -4,8 +4,6 @@ import logo from "../folder.svg";
 import "./Header.css";
 
 function Header({token}) {
-  // for testing conditional render  -- remove once done
-  
 
   const _handleBurger = () => {
     const navBurger = document.getElementById("navBurger");
@@ -15,7 +13,7 @@ function Header({token}) {
     navbarMenu.classList.toggle("is-active");
   };
   return (
-    <div>
+    <div className="Header">
       <nav className="navbar">
         <div className="navbar-brand">
           <div className="navbar-item">
@@ -36,33 +34,33 @@ function Header({token}) {
 
         <div id="navbarMenu" className="navbar-menu ">
           <div className="navbar-end">
-            <Link to="/new" className="navbar-item is-hidden-tablet">
+            <NavLink to="/dashboard/add" className="navbar-item is-hidden-tablet">
               <span className="icon">
                 <i className="far fa-plus-square"></i>
               </span>
               <span>New Snippet</span>
-            </Link>
-            <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
+            </NavLink>
+            <NavLink to="dashboard/library" className="navbar-item is-hidden-tablet" href="#evScaleInfo">
               <span className="icon">
                 <i className="fas fa-code"></i>
               </span>
               <span>Library</span>
-            </a>
-            <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
+            </NavLink>
+            {/* <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
               <span className="icon">
                 <i className="fas fa-archive"></i>
               </span>
               <span>Collections</span>
-            </a>
+            </a> */}
             <hr className="navdivider"></hr>
 
             {token && token !== "" ? (
-              <Link to="/dashboard" className="navbar-item">
+              <NavLink to="/dashboard" className="navbar-item">
                 <span className="icon">
                   <i className="far fa-user"></i>
                 </span>
                 <span>Profile</span>
-              </Link>) : ( "" )}
+              </NavLink>) : ( "" )}
 
             {token && token !== "" ? (
               <Link to="/logout" className="navbar-item">
