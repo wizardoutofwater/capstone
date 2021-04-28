@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const port = 3001;
 const authRoutes = require("./server/routes/auth");
 const snippetRoutes = require("./server/routes/snippet");
+const searchRoutes = require("./server/routes/search");
 const app = express();
 app.use(helmet());
 app.use(express.json());
@@ -11,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/api", authRoutes);
 app.use("/api", snippetRoutes);
+app.use("/api", searchRoutes);
 
 app.use(express.static(__dirname + "/build"));
 
