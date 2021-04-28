@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-function Login() {
+function Login(props) {
   // form validation rules
   const validationSchema = Yup.object().shape({
-
-    eMail: Yup.string().required("Email is required").email("Email is invalid"),
-    password: Yup.string()
-      // .min(6, "Password must be at least 6 characters")
-      .required("Password is required")
-      .matches(
-        /^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/,
-        "Oops! Your password must be at least 8 characters long and contain a mix of letters, numbers, and symbols"
-      ),
-  
+    email: Yup.string().required("Email is required").email("Email is invalid"),
+    
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -25,23 +17,22 @@ function Login() {
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  function onSubmit(data) {
-    // display form data on success
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
-    // return false;
+   const onSubmit= (data) => {
+ 
     data = JSON.stringify(data);
     console.log(data);
     const headers = {
       "Content-Type": "application/json",
     };
     axios
-      .post("https://localhost:3001/api/login", data, { headers })
-      .then((response) => {
-        localStorage.setItem("user-token", response.token);
-        this.props.updateToken(response.token);
-        this.props.history.push("/dashboard");
-      });
-  }
+      .post("http://localhost:3001/api/login", data, { headers })
+      .then(response => {
+        console.log(response);
+        localStorage.setItem("user-token", response.data.accessToken);
+        props.updateToken(response.data.accessToken);
+        props.history.push("/dashboard");
+      })
+  };
 
   return (
     <>
@@ -60,22 +51,25 @@ function Login() {
             </div>
           </div>
           <div className="column">
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="field has-text-left">
                 <label className="label">Email</label>
                 <div className="control">
                   <input
+                    {...register("email")}
                     className="input"
                     type="email"
                     placeholder="e.g. ex@mple.com"
                   />
                 </div>
+                <p className="help is-danger">{errors.email?.message}</p>
               </div>
 
               <div className="field has-text-left">
                 <label className="label">Password</label>
                 <div className="control">
                   <input
+                    {...register("password")}
                     className="input"
                     type="password"
                     placeholder="********"

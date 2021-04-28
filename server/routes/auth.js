@@ -35,8 +35,8 @@ router.post("/login", async (req, res) => {
     });
   }
   // grab email and lower case it and password
-  email = req.body.email.toLowerCase();
-  password = req.body.password;
+  let email = req.body.email.toLowerCase();
+ let password = req.body.password;
 
   //find user
   let foundUser = await findUserByEmail(email);

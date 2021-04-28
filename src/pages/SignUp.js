@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -10,14 +10,14 @@ function SignUp() {
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    eMail: Yup.string().required("Email is required").email("Email is invalid"),
+    email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string()
-      // .min(6, "Password must be at least 6 characters")  
       .required("Password is required")
       .matches(
         /^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/,
         "Oops! Your password must be at least 8 characters long and contain a mix of letters, numbers, and symbols"
       ),
+      // confirmEmail -- Add in
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
@@ -29,21 +29,22 @@ function SignUp() {
   const { errors } = formState;
 
   function onSubmit(data) {
-    //TEST -- display form data on success
+    // TEST -- display form data on success
     // alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
     // return false;
     data = JSON.stringify(data);
-    console.log (data);
+    console.log(data);
     const headers = {
-      'Content-Type': 'application/json'
-    }
-    axios.post('https://localhost:3001/api/login', data, { headers })
-      .then(response => {
-        localStorage.setItem('user-token', response.token);
+      "Content-Type": "application/json",
+    };
+    axios
+      .post("http://localhost:3001/api/signup", data, { headers })
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("user-token", response.token);
         this.props.updateToken(response.token);
-        this.props.history.push('/dashboard');
-      })
-
+        this.props.history.push("/dashboard");
+      });
   }
 
   return (
@@ -63,60 +64,66 @@ function SignUp() {
             </div>
           </div>
           <div className="column ">
-          <div className="box">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="field has-text-left">
-                <label className="label">Email</label>
-                <div className="control">
-                  <input
-                    {...register("eMail")}
-                    className="input"
-                    placeholder="e.g. ex@mple.com"
-                  />
+            <div className="box">
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="field has-text-left">
+                  <label className="label">Email</label>
+                  <div className="control">
+                    <input
+                      {...register("email")}
+                      className="input"
+                      placeholder="e.g. ex@mple.com"
+                    />
+                  </div>
+                  <p className="help is-danger">{errors.email?.message}</p>
                 </div>
-                <p className="help is-danger">{errors.eMail?.message}</p>
-              </div>
 
-              <div className="field has-text-left">
-                <label className="label">Password</label>
-                
-                <div className="control">
-                  <input
-                    {...register("password")}
-                    className="input"
-                    type="password"
-                    placeholder="********"
-                  />
+                <div className="field has-text-left">
+                  <label className="label">Password</label>
+
+                  <div className="control">
+                    <input
+                      {...register("password")}
+                      className="input"
+                      type="password"
+                      placeholder="********"
+                    />
+                  </div>
+                  <p className="help">
+                    Use at least 8 characters and a mix of letters, numbers, and
+                    symbols
+                  </p>
+                  <p className="help is-danger">{errors.password?.message}</p>
                 </div>
-                <p className="help">Use at least 8 characters and a mix of letters, numbers, and symbols</p>
-                <p className="help is-danger">{errors.password?.message}</p>
-              </div>
 
-              <div className="field has-text-left ">
-                <label className="label">Confirm Password</label>
-                <div className="control">
-                  <input
-                    {...register("confirmPassword")}
-                    className="input"
-                    type="password"
-                    placeholder="********"
-                  />
+                <div className="field has-text-left ">
+                  <label className="label">Confirm Password</label>
+                  <div className="control">
+                    <input
+                      {...register("confirmPassword")}
+                      className="input"
+                      type="password"
+                      placeholder="********"
+                    />
+                  </div>
+                  <p className="help is-danger">
+                    {errors.confirmPassword?.message}
+                  </p>
                 </div>
-                <p className="help is-danger">{errors.confirmPassword?.message}</p>
-              </div>
 
-              <button className="button is-primary">Sign Up</button>
-              <hr />
-              <p>
-                Already have an account? <Link to="/login">Log In</Link>
-              </p>
-            </form>
+                <button className="button is-primary">Sign Up</button>
+                <hr />
+                <p>
+                  Already have an account? <Link to="/login">Log In</Link>
+                </p>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </>
   );
 }
+
 
 export default SignUp;

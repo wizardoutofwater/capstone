@@ -3,9 +3,9 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../folder.svg";
 import "./Header.css";
 
-function Header() {
+function Header({token}) {
   // for testing conditional render  -- remove once done
-  let token = false;
+  
 
   const _handleBurger = () => {
     const navBurger = document.getElementById("navBurger");
@@ -55,7 +55,7 @@ function Header() {
               <span>Collections</span>
             </a>
             <hr className="navdivider"></hr>
-{/* Is this Valid?  renders <span> inside of an <a> -- swictch to bulma-react-components and use renderAs props */}
+
             {token && token !== "" ? (
               <Link to="/dashboard" className="navbar-item">
                 <span className="icon">
