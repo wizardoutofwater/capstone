@@ -1,24 +1,47 @@
-import logo from './logo.svg';
+import React, { useState, useEffect} from 'react';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Header from './components/Header';
+import  SignUp from './pages/SignUp';
+import  Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+
 
 function App() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    let token = localStorage.getItem('user-token');
+    if (token) {
+      setToken(token);
+    }
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> in order to hack the planet.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Header token={token} />
+    <div className ="section main-content">
+    <Switch>
+          <Route exact path="/">
+            {/* <Landing /> */}
+            <h1>this will be the homePage</h1>
+          </Route>
+          <Route path="/login" render={(props) => (
+            <Login {...props} updateToken={setToken} />
+          )}>
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+        </Switch>
+   
     </div>
+
+    </div>
+
   );
 }
 

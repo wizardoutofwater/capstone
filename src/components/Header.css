@@ -1,0 +1,25 @@
+/* @media screen and (max-width: 768px) {
+    #menu-toggle:checked + .nav-menu {
+      display: block;
+    }
+  } */
+
+
+.navbar nav {
+  position: relative;
+}
+
+.navbar #navbarMenu {
+  position: absolute;
+  width: 50%;
+  right: 0px;
+  text-align: left;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.navbar .navdivider  {
+  border-top: 2px solid #bbb;
+  border-radius: 2px;
+  margin: .5em;
+  padding-bottom: 0em;
+}

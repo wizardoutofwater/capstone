@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hookform/resolvers": "^2.4.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "bulma": "^0.9.2",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -16,11 +18,16 @@
     "pbkdf2": "^3.1.2",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
+    "prismjs": "^1.23.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.3.3",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-simple-code-editor": "^0.11.0",
     "sequelize": "^6.6.2",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start | nodemon server.js | npm run css-watch",
@@ -49,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-prismjs": "^2.0.1",
     "faker": "^5.5.3",
     "nodemon": "^2.0.7"
   }

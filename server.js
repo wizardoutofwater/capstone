@@ -5,6 +5,9 @@ const port = 3001;
 const authRoutes = require("./server/routes/auth");
 const snippetRoutes = require("./server/routes/snippet");
 const app = express();
+const cors = require('cors');
+
+app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
