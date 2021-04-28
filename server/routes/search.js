@@ -8,9 +8,9 @@ const authenticateToken = require("./helper/authenticateToken");
 router.use(express.json());
 
 router.get("/search", authenticateToken, (req, res) => {
-  let serachTerms = req.query;
-  let search = Object.keys(serachTerms)[0];
-  let value = serachTerms[Object.keys(serachTerms)[0]];
+  let searchTerms = req.query;
+  let search = Object.keys(searchTerms)[0];
+  let value = serachTerms[Object.keys(searchTerms)[0]];
   let user_id = req.user.id;
 
   db.snippet
