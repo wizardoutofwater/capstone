@@ -10,7 +10,7 @@ router.use(express.json());
 router.get("/search", authenticateToken, (req, res) => {
   let searchTerms = req.query;
   let search = Object.keys(searchTerms)[0];
-  let value = serachTerms[Object.keys(searchTerms)[0]];
+  let value = searchTerms[Object.keys(searchTerms)[0]];
   let user_id = req.user.id;
 
   db.snippet
