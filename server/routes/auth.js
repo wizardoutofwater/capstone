@@ -51,7 +51,9 @@ router.post("/login", async (req, res) => {
   let pass_parts = userPassword.split("$");
   let enteredPassword = encryptPassword(password, pass_parts[1]);
   if (enteredPassword == userPassword) {
-    const accessToken = jwt.sign(foundUser, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign(foundUser, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "12h",
+    });
     return res.status(200).json({
       accessToken: accessToken,
     });
@@ -105,8 +107,16 @@ router.post("/signup", async (req, res) => {
     })
     .then((createdUser) => {
       let jsonCreatedUser = createdUser.toJSON();
-      return res.status(201).json({
+      const accessToken = jwt.sign(
         jsonCreatedUser,
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          expiresIn: "12h",
+        }
+      );
+
+      return res.status(201).json({
+        accessToken: accessToken,
       });
     })
     .catch((err) => {

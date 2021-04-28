@@ -129,4 +129,18 @@ router.delete("/user/snippets/:id", authenticateToken, (req, res) => {
     });
 });
 
+router.get("/user", authenticateToken, (req, res) => {
+  let user_id = req.user.id;
+  db.user
+    .findByPk(user_id)
+    .then((data) => {
+      return res.status(200).json({ user: data });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err || "Some error occured",
+      });
+    });
+});
+
 module.exports = router;
