@@ -1,0 +1,5 @@
+.AddSnippet .box {
+    width: max-content;
+    min-width: 30em;
+    min-height: 10em;
+}
