@@ -3,6 +3,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 import SideNav from "../components/SideNav";
 import Main from "../components/Main";
 import AddSnippet from "../components/AddSnippet";
+import Search from "../components/Search";
 
 function Dashboard({ token }) {
   let { path, url } = useRouteMatch();
@@ -14,11 +15,16 @@ function Dashboard({ token }) {
           <SideNav />
           <main className="column">
             <Switch>
-              <Route exact path={path} component={Main}/>
+              <Route exact path={path} component={Main} />
 
-              <Route path={`${path}/add`} render={(props) => (
-                  <AddSnippet {...props} token={token}/>
-              )} />
+              <Route
+                path={`${path}/add`}
+                render={(props) => <AddSnippet {...props} token={token} />}
+              />
+              <Route
+                path={`${path}/search`}
+                render={(props) => <Search {...props} token={token} />}
+              />
             </Switch>
           </main>
         </div>
