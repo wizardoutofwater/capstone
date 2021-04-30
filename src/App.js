@@ -34,7 +34,7 @@ function App() {
             <SignUp />
           </Route>
           <Route path="/dashboard">
-            <Dashboard />
+            <Dashboard token={token}/>
           </Route>
         </Switch>
    

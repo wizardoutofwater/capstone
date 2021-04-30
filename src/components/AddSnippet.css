@@ -1,0 +1,19 @@
+.AddSnippet .box {
+    width: max-content;
+    min-width: 30em;
+    min-height: 10em;
+}
+.AddSnippet .number {
+     align-items: inherit; 
+     background-color: inherit; 
+     border-radius: inherit; 
+     display: inherit; 
+     font-size: inherit; 
+     height: inherit; 
+     justify-content: inherit; 
+     margin-right: 0; 
+     min-width: 0; 
+     padding: 0; 
+     text-align: inherit; 
+     vertical-align: inherit; 
+}

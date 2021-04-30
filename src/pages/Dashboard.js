@@ -4,7 +4,7 @@ import SideNav from "../components/SideNav";
 import Main from "../components/Main";
 import AddSnippet from "../components/AddSnippet";
 
-function Dashboard() {
+function Dashboard({ token }) {
   let { path, url } = useRouteMatch();
 
   return (
@@ -14,9 +14,11 @@ function Dashboard() {
           <SideNav />
           <main className="column">
             <Switch>
-              <Route exact path={path} component={Main}></Route>
+              <Route exact path={path} component={Main}/>
 
-              <Route path={`${path}/add`} component={AddSnippet}></Route>
+              <Route path={`${path}/add`} render={(props) => (
+                  <AddSnippet {...props} token={token}/>
+              )} />
             </Switch>
           </main>
         </div>

@@ -37,7 +37,7 @@ router.get("/user/snippets/:id", authenticateToken, (req, res) => {
 });
 
 router.post("/user/snippets", authenticateToken, (req, res) => {
-  let user_id = req.user.id;
+  req.body.user_id = req.user.id;
 
   // validation
   if (req.body.snippet === "" || !req.body.snippet) {
@@ -45,6 +45,7 @@ router.post("/user/snippets", authenticateToken, (req, res) => {
       error: "Must provide a code snippet",
     });
   }
+
   if (!req.body.user_id || !req.body.language_id) {
     return res.status(400).json({
       error: "Must provide a user id and language id",
