@@ -4,11 +4,27 @@ import axios from "axios";
 
 import { supportedLanguages, languageAlias } from "../supported-languages";
 import { highlight, languages } from "prismjs/components/prism-core";
+
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-markup";
-import "prismjs/themes/prism-okaidia.css";
+import "prismjs/components/prism-css";
+// -- languages below are commented out b/c they are casuing problems and will be replaced when we install react-prism-renderer
+// import "prismjs/components/prism-c";
+// import "prismjs/components/prism-cpp";
+// import "prismjs/components/prism-csharp";
+// import "prismjs/components/prism-php-extras";
+// import "prismjs/components/prism-php";
+// import "prismjs/components/prism-python";
+// import "prismjs/components/prism-aspnet";
+// import "prismjs/components/prism-bash";
+// import "prismjs/components/prism-java";
+// import "prismjs/components/prism-git";
+
+
+import "prismjs/themes/prism.css";
 import "./AddSnippet.css";
+
 
 class AddSnippet extends Component {
   constructor(props) {
@@ -18,16 +34,16 @@ class AddSnippet extends Component {
       code: "",
       note: "",
       language_id: "4",
-      language_alias: "javascript",
+      language_alias: "js",
     };
   }
 
- // if updating language selection, this grabs the language alias using its ID
+  // if updating language selection, this grabs the language alias using its ID
   componentDidUpdate(prevProps, prevState) {
     if (prevState.language_id !== this.state.language_id) {
       console.log("updating language alias");
       let selectedLanguage = languageAlias[this.state.language_id];
-      console.log(selectedLanguage)
+      console.log(selectedLanguage);
       this.setState({
         ...this.state,
         language_alias: selectedLanguage,
@@ -37,7 +53,6 @@ class AddSnippet extends Component {
 
   _handleUpdate = (field, val) => {
     console.log("setting updated. value:" + val);
-   
 
     this.setState({
       ...this.state,
@@ -95,13 +110,15 @@ class AddSnippet extends Component {
             <Editor
               value={this.state.code}
               onValueChange={(code) => this.setState({ code })}
-              highlight={(code) => highlight(code, languages[this.state.language_alias])}
+              highlight={(code) =>
+                highlight(code, languages[this.state.language_alias])
+              }
               padding={10}
-              placeholder="//paste your code here"
+              placeholder="//paste your code here..."
               style={{
                 fontFamily: '"Fira Code", "Fira Mono", monospace',
-                 fontSize: 12,
-                // backgroundColor: "#282822",
+                fontSize: 12,
+                backgroundColor: "#F5F5F5",
                 minHeight: "20em",
               }}
             />
@@ -134,7 +151,7 @@ class AddSnippet extends Component {
                     <option value="2">CSS</option>
                     <option value="3">C-Like</option>
                     <option value="4">JavaScript</option>
-                    <option value="5">ASP.NET</option>
+                    {/* <option value="5">ASP.NET</option>
                     <option value="6">Bash</option>
                     <option value="7">C</option>
                     <option value="8">C#</option>
@@ -143,7 +160,7 @@ class AddSnippet extends Component {
                     <option value="11">Java</option>
                     <option value="12">JSX (React)</option>
                     <option value="13">Python</option>
-                    <option value="14">PHP</option>
+                    <option value="14">PHP</option> */}
                   </select>
                 </div>
               </div>
