@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Prism from "prismjs";
-import "../prism.css";
+import "../prism-okadia.css";
 
 export class Snippet extends Component {
   componentDidMount() {
