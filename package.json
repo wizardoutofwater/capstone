@@ -30,12 +30,11 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start | nodemon server.js | npm run css-watch",
+    "start": "react-scripts start | nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css",
-    "css-watch": "npm run css-build -- --watch"
+    "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": [

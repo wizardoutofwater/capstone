@@ -120,6 +120,7 @@ class AddSnippet extends Component {
                 fontSize: 12,
                 backgroundColor: "#F5F5F5",
                 minHeight: "20em",
+                overflow: "auto",
               }}
             />
             <br />

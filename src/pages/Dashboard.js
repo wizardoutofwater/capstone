@@ -4,6 +4,7 @@ import SideNav from "../components/SideNav";
 import Main from "../components/Main";
 import AddSnippet from "../components/AddSnippet";
 import Search from "../components/Search";
+import Library from "../components/Library";
 
 function Dashboard({ token }) {
   let { path, url } = useRouteMatch();
@@ -24,6 +25,10 @@ function Dashboard({ token }) {
               <Route
                 path={`${path}/search`}
                 render={(props) => <Search {...props} token={token} />}
+              />
+                <Route
+                path={`${path}/library`}
+                render={(props) => <Library {...props} token={token} />}
               />
             </Switch>
           </main>
