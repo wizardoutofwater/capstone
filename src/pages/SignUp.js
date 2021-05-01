@@ -17,7 +17,7 @@ function SignUp(props) {
         /^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/,
         "Oops! Your password must be at least 8 characters long and contain a mix of letters, numbers, and symbols"
       ),
-      // confirmEmail -- Add in
+    // confirmEmail -- Add in
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
@@ -40,8 +40,11 @@ function SignUp(props) {
         localStorage.setItem("user-token", response.data.accessToken);
         props.updateToken(response.data.accessToken);
         props.history.push("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err.response.data.error);
       });
-  }
+  };
 
   return (
     <>
@@ -120,6 +123,5 @@ function SignUp(props) {
     </>
   );
 }
-
 
 export default SignUp;

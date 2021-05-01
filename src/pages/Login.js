@@ -9,7 +9,6 @@ function Login(props) {
   // form validation rules
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
-    
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -17,8 +16,7 @@ function Login(props) {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-   const onSubmit= (data) => {
- 
+  const onSubmit = (data) => {
     data = JSON.stringify(data);
     console.log(data);
     const headers = {
@@ -32,6 +30,9 @@ function Login(props) {
         props.updateToken(response.data.accessToken);
         props.history.push("/dashboard");
       })
+      .catch((err) => {
+        console.log(err.response.data.error);
+      });
   };
 
   return (
