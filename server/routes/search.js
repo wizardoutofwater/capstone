@@ -18,7 +18,7 @@ router.get("/search", authenticateToken, (req, res) => {
       where: {
         user_id: user_id,
         [search]: {
-          [Op.substring]: value,
+          [Op.iLike]: `%${value}%`,
         },
       },
     })
