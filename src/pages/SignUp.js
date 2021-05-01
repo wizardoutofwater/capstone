@@ -42,7 +42,9 @@ function SignUp(props) {
         props.history.push("/dashboard");
       })
       .catch((err) => {
-        console.log(err.response.data.error);
+        console.log(
+          err.response ? err.response.data.error : "Something went wrong"
+        );
       });
   };
 
