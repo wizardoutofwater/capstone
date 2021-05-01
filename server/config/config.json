@@ -13,11 +13,20 @@
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
-  "production": {
-    "username": "root",
+   "production": {
+    "username": "postgres",
     "password": null,
     "database": "capstone",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "host": "localHost",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      },
+      "keepAlive": true        
+    },      
+    "ssl": true,
+    "use_env_variable": "DATABASE_URL"
   }
 }
