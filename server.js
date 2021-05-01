@@ -1,7 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-const port = 3001;
+const port = process.env.PORT || 3001;
 const authRoutes = require("./server/routes/auth");
 const snippetRoutes = require("./server/routes/snippet");
 const searchRoutes = require("./server/routes/search");
