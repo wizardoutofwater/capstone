@@ -12,7 +12,7 @@ function Library(props) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${props.token}`,
           };
-        axios.get('http://localhost:3001/api/user/snippets', { headers })
+        axios.get('/api/user/snippets', { headers })
             .then((response) => {
             console.log(response)
                 setSnippetsResponse(response.data.snippets)
