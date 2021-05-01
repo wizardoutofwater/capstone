@@ -43,7 +43,7 @@ class SearchBar extends Component {
                 name="search"
                 type="text"
                 placeholder="Search snippets..."
-                onBlur={(event) =>
+                onChange={(event) =>
                   this._handleUpdate("title", event.target.value)
                 }
               />

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Prism from "prismjs";
+import './Library.css'
 
 function Library(props) {
    
@@ -18,20 +20,40 @@ function Library(props) {
 
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, [props.token]);
-console.log(snippetsResponse)
+
+    console.log(snippetsResponse)
+const allSnippets = () =>{
+    if (!snippetsResponse || snippetsResponse === null || snippetsResponse === []) {
+        return (<div>No Snippets in Library</div>)
+    }
     return (
+   
         <>
-        {snippetsResponse.map(snippet=>
-            <div className="card text-center m-3">
-            <h5 className="card-header">{snippet.title}</h5>
+        {snippetsResponse.map((snippet)=> {
+        return (
+        <div className="" >
+            <div className="box">
+            <h5 className="subtitle">{snippet.title}</h5>
             <div className="card-body">
-                <p>{snippet.snippet}</p>
+                <pre>
+                <code >{snippet.snippet}</code>
+                </pre>
                 <p>{snippet.note}</p>
             </div>
         </div>
+        </div>
+        )
+        }
         )}
-        
-</> 
+        </> 
+
+    )
+    
+}
+    return (
+        <div>
+        {allSnippets()}
+        </div>
     );
     }
 export default Library;
