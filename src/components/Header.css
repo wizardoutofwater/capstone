@@ -5,11 +5,11 @@
   } */
 
 
-.Navbar nav {
+.Header nav {
   position: relative;
 }
 
-.Navbar #navbarMenu {
+.Header #navbarMenu {
   position: absolute;
   width: 50%;
   right: 0px;
@@ -17,13 +17,13 @@
   border-radius: 0px 0px 15px 15px;
 }
 
-.Navbar .navdivider  {
+.Header .navdivider  {
   border-top: 2px solid #bbb;
   border-radius: 2px;
   margin: .5em;
   padding-bottom: 0em;
 }
 
-.Navbar a .is-active {
+.Header a .is-active {
   background-color: #00AFB9;
 }

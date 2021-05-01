@@ -1,8 +1,13 @@
 .AddSnippet .box {
     /* width: max-content; */
-    max-width: 100vw;
+    max-width: 100%;
     min-width: 40vw;
     min-height: 10em;
+    overflow:auto;
+}
+.AddSnippet pre, .AddSnippet textarea {
+    overflow: auto;
+    word-break: normal;
 }
 /* .AddSnippet .number {
      align-items: inherit; 

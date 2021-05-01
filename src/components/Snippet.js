@@ -3,6 +3,7 @@ import Prism from "prismjs";
 
 
 export class Snippet extends Component {
+
   componentDidMount() {
     Prism.highlightAll();
   }
@@ -28,3 +29,18 @@ export class Snippet extends Component {
     );
   }
 }
+
+// function Snippet(props){
+//   const snippetList = props.snippets.map((snippet) =>
+//   <div key={snippet.id}>
+//     <h3>{snippet.title}</h3>
+//     <pre><code>{snippet.code}</code></pre>
+//     <p>{snippet.note}</p>
+//   </div>
+// );
+// return (
+//   {snippetList}
+// )
+// }
+export default Snippet
+
