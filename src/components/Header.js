@@ -3,8 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../folder.svg";
 import "./Header.css";
 
-function Header({token}) {
-
+function Header({ token, setToken }) {
   const _handleBurger = () => {
     const navBurger = document.getElementById("navBurger");
     const navbarMenu = document.getElementById("navbarMenu");
@@ -12,6 +11,12 @@ function Header({token}) {
     navBurger.classList.toggle("is-active");
     navbarMenu.classList.toggle("is-active");
   };
+
+  const _logOut = () => {
+    setToken("");
+    localStorage.setItem("user-token", "");
+  };
+
   return (
     <div className="Header">
       <nav className="navbar">
@@ -34,13 +39,20 @@ function Header({token}) {
 
         <div id="navbarMenu" className="navbar-menu ">
           <div className="navbar-end">
-            <NavLink to="/dashboard/add" className="navbar-item is-hidden-tablet">
+            <NavLink
+              to="/dashboard/add"
+              className="navbar-item is-hidden-tablet"
+            >
               <span className="icon">
                 <i className="far fa-plus-square"></i>
               </span>
               <span>New Snippet</span>
             </NavLink>
-            <NavLink to="dashboard/library" className="navbar-item is-hidden-tablet" href="#evScaleInfo">
+            <NavLink
+              to="dashboard/library"
+              className="navbar-item is-hidden-tablet"
+              href="#evScaleInfo"
+            >
               <span className="icon">
                 <i className="fas fa-code"></i>
               </span>
@@ -60,10 +72,13 @@ function Header({token}) {
                   <i className="far fa-user"></i>
                 </span>
                 <span>Profile</span>
-              </NavLink>) : ( "" )}
+              </NavLink>
+            ) : (
+              ""
+            )}
 
             {token && token !== "" ? (
-              <Link to="/logout" className="navbar-item">
+              <Link to="/login" className="navbar-item" onClick={_logOut}>
                 <span className="icon">
                   <i className="fas fa-sign-out-alt"></i>
                 </span>
@@ -82,6 +97,6 @@ function Header({token}) {
       </nav>
     </div>
   );
-};
+}
 
 export default Header;
