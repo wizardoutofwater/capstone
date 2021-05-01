@@ -39,32 +39,41 @@ function Header({ token, setToken }) {
 
         <div id="navbarMenu" className="navbar-menu ">
           <div className="navbar-end">
-            <NavLink
-              to="/dashboard/add"
-              className="navbar-item is-hidden-tablet"
-            >
-              <span className="icon">
-                <i className="far fa-plus-square"></i>
-              </span>
-              <span>New Snippet</span>
-            </NavLink>
-            <NavLink
-              to="dashboard/library"
-              className="navbar-item is-hidden-tablet"
-              href="#evScaleInfo"
-            >
-              <span className="icon">
-                <i className="fas fa-code"></i>
-              </span>
-              <span>Library</span>
-            </NavLink>
+            {token && token !== "" ? (
+              <NavLink
+                to="/dashboard/add"
+                className="navbar-item is-hidden-tablet"
+              >
+                <span className="icon">
+                  <i className="far fa-plus-square"></i>
+                </span>
+                <span>New Snippet</span>
+              </NavLink>
+            ) : (
+              ""
+            )}
+            {token && token !== "" ? (
+              <NavLink
+                to="dashboard/library"
+                className="navbar-item is-hidden-tablet"
+                href="#evScaleInfo"
+              >
+                <span className="icon">
+                  <i className="fas fa-code"></i>
+                </span>
+                <span>Library</span>
+              </NavLink>
+            ) : (
+              ""
+            )}
             {/* <a className="navbar-item is-hidden-tablet" href="#evScaleInfo">
               <span className="icon">
                 <i className="fas fa-archive"></i>
               </span>
               <span>Collections</span>
             </a> */}
-            <hr className="navdivider"></hr>
+
+            {token && token !== "" ? <hr className="navdivider"></hr> : ""}
 
             {token && token !== "" ? (
               <NavLink to="/dashboard" className="navbar-item">
