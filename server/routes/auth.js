@@ -36,7 +36,7 @@ router.post("/login", async (req, res) => {
   }
   // grab email and lower case it and password
   let email = req.body.email.toLowerCase();
- let password = req.body.password;
+  let password = req.body.password;
 
   //find user
   let foundUser = await findUserByEmail(email);
@@ -58,7 +58,7 @@ router.post("/login", async (req, res) => {
       accessToken: accessToken,
     });
   } else {
-    return res.status(404).json({
+    return res.status(401).json({
       error: "wrong password",
     });
   }
@@ -93,7 +93,7 @@ router.post("/signup", async (req, res) => {
   // check if user exists already
   const isUserAlready = await findUserByEmail(email);
   if (isUserAlready) {
-    return res.status(403).send('email already exists')
+    return res.status(403).send("email already exists");
     // return res.status(403).json({
     //   error: "An account already exists with this email address",
     // });
