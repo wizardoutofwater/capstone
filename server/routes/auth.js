@@ -28,7 +28,7 @@ const encryptPassword = (word, pass_salt) => {
   return `$${salt}$${hash}`;
 };
 
-router.post("/login", async (req, res) => {
+router.post("/api/login", async (req, res) => {
   if (req.body.username === "" || req.body.password === "") {
     return res.status(401).json({
       error: "User name or password required",
@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/api/signup", async (req, res) => {
   // set formats
   const emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const passwordFormat = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g;

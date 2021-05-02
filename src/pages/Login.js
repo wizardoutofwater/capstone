@@ -23,7 +23,7 @@ function Login(props) {
       "Content-Type": "application/json",
     };
     axios
-      .post("/login", data, { headers })
+      .post("/api/login", data, { headers })
       .then((response) => {
         console.log(response);
         localStorage.setItem("user-token", response.data.accessToken);
