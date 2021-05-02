@@ -6,7 +6,7 @@ const db = require("../models");
 const authenticateToken = require("./helper/authenticateToken");
 router.use(express.json());
 
-router.get("/user/snippets", authenticateToken, (req, res) => {
+router.get("/api/user/snippets", authenticateToken, (req, res) => {
   let user_id = req.user.id;
   db.snippet
     .findAll({
@@ -22,7 +22,7 @@ router.get("/user/snippets", authenticateToken, (req, res) => {
     });
 });
 
-router.get("/user/snippets/:id", authenticateToken, (req, res) => {
+router.get("/api/user/snippets/:id", authenticateToken, (req, res) => {
   let snippet_id = req.params.id;
   db.snippet
     .findByPk(snippet_id)
@@ -36,7 +36,7 @@ router.get("/user/snippets/:id", authenticateToken, (req, res) => {
     });
 });
 
-router.post("/user/snippets", authenticateToken, (req, res) => {
+router.post("/api/user/snippets", authenticateToken, (req, res) => {
   req.body.user_id = req.user.id;
 
   // validation
@@ -67,7 +67,7 @@ router.post("/user/snippets", authenticateToken, (req, res) => {
     });
 });
 
-router.put("/user/snippets/:id", authenticateToken, (req, res) => {
+router.put("/api/user/snippets/:id", authenticateToken, (req, res) => {
   let snippet_id = req.params.id;
 
   // validation
@@ -106,7 +106,7 @@ router.put("/user/snippets/:id", authenticateToken, (req, res) => {
     });
 });
 
-router.delete("/user/snippets/:id", authenticateToken, (req, res) => {
+router.delete("/api/user/snippets/:id", authenticateToken, (req, res) => {
   let snippet_id = req.params.id;
 
   db.snippet
@@ -130,7 +130,7 @@ router.delete("/user/snippets/:id", authenticateToken, (req, res) => {
     });
 });
 
-router.get("/user", authenticateToken, (req, res) => {
+router.get("/api/user", authenticateToken, (req, res) => {
   let user_id = req.user.id;
   db.user
     .findByPk(user_id)
