@@ -59,7 +59,7 @@ router.post("/api/login", async (req, res) => {
     });
   } else {
     return res.status(401).json({
-      error: "wrong password",
+      error: "Wrong password",
     });
   }
 });
@@ -93,7 +93,9 @@ router.post("/api/signup", async (req, res) => {
   // check if user exists already
   const isUserAlready = await findUserByEmail(email);
   if (isUserAlready) {
-    return res.status(403).send("email already exists");
+    return res
+      .status(403)
+      .json({ error: "An account already exists with this email address" });
     // return res.status(403).json({
     //   error: "An account already exists with this email address",
     // });

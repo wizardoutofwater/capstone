@@ -16,8 +16,8 @@ router.get("/api/user/snippets", authenticateToken, (req, res) => {
       return res.status(200).json({ snippets: data });
     })
     .catch((err) => {
-      res.status(500).json({
-        message: err || "Some error occured",
+      res.status(400).json({
+        message: err.parent.detail || "Some error occured",
       });
     });
 });
@@ -30,8 +30,8 @@ router.get("/api/user/snippets/:id", authenticateToken, (req, res) => {
       return res.status(200).json({ snippet: data });
     })
     .catch((err) => {
-      res.status(500).json({
-        message: err || "Some error occured",
+      res.status(400).json({
+        message: err.parent.detail || "Some error occured",
       });
     });
 });
@@ -61,7 +61,7 @@ router.post("/api/user/snippets", authenticateToken, (req, res) => {
       return res.status(200).json({ snippet: data });
     })
     .catch((err) => {
-      res.status(500).json({
+      res.status(400).json({
         message: err.parent.detail || "Some error occured",
       });
     });
@@ -119,12 +119,12 @@ router.delete("/api/user/snippets/:id", authenticateToken, (req, res) => {
         return res.status(200).json({ success: "Snippet deleted!" });
       } else {
         return res
-          .status(200)
+          .status(400)
           .json({ error: `Unable to delete snippet with id of ${snippet_id}` });
       }
     })
     .catch((err) => {
-      res.status(500).json({
+      res.status(400).json({
         message: err.parent.detail || "Some error occured",
       });
     });
@@ -138,8 +138,8 @@ router.get("/api/user", authenticateToken, (req, res) => {
       return res.status(200).json({ user: data });
     })
     .catch((err) => {
-      res.status(500).json({
-        message: err || "Some error occured",
+      res.status(400).json({
+        message: err.parent.detail || "Some error occured",
       });
     });
 });

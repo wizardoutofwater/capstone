@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 function Login(props) {
+  const [error, setError] = useState(null);
   // form validation rules
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -31,9 +32,11 @@ function Login(props) {
         props.history.push("/dashboard");
       })
       .catch((err) => {
-        console.log(
-          err.response ? err.response.data.error : "Something went wrong"
-        );
+        if (err.response) {
+          setError(err.response.data.error);
+        } else {
+          setError("Something went wrong");
+        }
       });
   };
 
@@ -77,6 +80,7 @@ function Login(props) {
                     type="password"
                     placeholder="********"
                   />
+                  <p className="help is-danger">{error ? error : ""}</p>
                 </div>
               </div>
 
