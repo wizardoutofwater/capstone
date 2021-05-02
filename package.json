@@ -2,6 +2,7 @@
   "name": "capstone",
   "version": "0.1.0",
   "private": true,
+ 
   "dependencies": {
     "@hookform/resolvers": "^2.4.0",
     "@testing-library/jest-dom": "^5.11.10",
@@ -31,7 +32,7 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start | nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

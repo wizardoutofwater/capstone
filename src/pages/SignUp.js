@@ -34,7 +34,11 @@ function SignUp(props) {
       "Content-Type": "application/json",
     };
     axios
+<<<<<<< HEAD
       .post("/api/signup", data, { headers })
+=======
+      .post("http://localhost:3001/api/signup", data, { headers })
+>>>>>>> reverted to dev-environment setup
       .then((response) => {
         console.log(response);
         localStorage.setItem("user-token", response.data.accessToken);
