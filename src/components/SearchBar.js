@@ -24,7 +24,7 @@ class SearchBar extends Component {
       Authorization: `Bearer ${this.props.token}`,
     };
     axios
-      .get(`http://localhost:3001/api/search?title=${this.state.title}`, {
+      .get(`/api/search?title=${this.state.title}`, {
         headers,
       })
       .then((response) => {

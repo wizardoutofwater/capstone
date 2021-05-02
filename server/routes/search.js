@@ -7,7 +7,7 @@ const db = require("../models");
 const authenticateToken = require("./helper/authenticateToken");
 router.use(express.json());
 
-router.get("/search", authenticateToken, (req, res) => {
+router.get("/api/search", authenticateToken, (req, res) => {
   let searchTerms = req.query;
   let search = Object.keys(searchTerms)[0];
   let value = searchTerms[Object.keys(searchTerms)[0]];
