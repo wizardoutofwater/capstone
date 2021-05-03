@@ -22,7 +22,7 @@ export const supportedLanguages = {
     "1": "markup",
     "2": "css",
     "3": "clike",
-    "4": "javascript",
+    "4": "js",
     "5": "aspnet",
     "6": "bash",
     "7": "c",
