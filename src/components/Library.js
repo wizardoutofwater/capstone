@@ -37,11 +37,13 @@ function Library(props) {
           return (
             <Snippet 
                 key={snippet.id}
+                id={snippet.id}
                 title={snippet.title}
                 code={snippet.snippet}
                 note={snippet.note}
                 langId={snippet.language_id}
                 langName={languageName}
+                token={props.token}
                 />
           );
         })}
