@@ -79,7 +79,7 @@ class AddSnippet extends Component {
       Authorization: `Bearer ${this.props.token}`,
     };
     axios
-      .post("http://localhost:3001/api/user/snippets", data, { headers })
+      .post("/api/user/snippets", data, { headers })
       .then((response) => {
         console.log(response);
         this.props.history.push("/dashboard");
