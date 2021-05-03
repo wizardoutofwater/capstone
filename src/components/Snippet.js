@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Prism from "prismjs";
-import axios from 'axios'
+import axios from "axios";
 import "../assets/css/prism-okadia.css";
 import { supportedLanguages, languageAlias } from "../supported-languages";
 import "./Snippet.css";
@@ -16,10 +16,10 @@ function Snippet({ id, title, code, note, langId, langName, token }) {
   //   setLanguageName(languageName);
   // }, []);
 
- const _handleClick = (event) => {
-   console.log(title)
-      console.log(`delete clicked for ${id}`)
-    
+  const _handleClick = (event) => {
+    console.log(title);
+    console.log(`delete clicked for ${id}`);
+
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -29,7 +29,7 @@ function Snippet({ id, title, code, note, langId, langName, token }) {
         headers,
       })
       .then((response) => {
-        console.log(response);
+        window.location.reload();
       });
   };
 
@@ -71,10 +71,13 @@ function Snippet({ id, title, code, note, langId, langName, token }) {
           <div className=" ">
             <div className="buttons is-right">
               <button className="button is-primary  is-small">Edit</button>
-              <button 
-              id={id}
-              onClick={(event) =>_handleClick(event)}
-              className="button is-small">Delete</button>
+              <button
+                id={id}
+                onClick={(event) => _handleClick(event)}
+                className="button is-small"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 .SearchBar .box {
-  width: max-content;
-  min-width: 30em;
+  max-width: 100%;
+  min-width: 40vw;
   min-height: 5em;
+  overflow: auto;
 }
