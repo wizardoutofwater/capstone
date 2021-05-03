@@ -21,10 +21,8 @@ import "prismjs/components/prism-css";
 // import "prismjs/components/prism-java";
 // import "prismjs/components/prism-git";
 
-
 import "prismjs/themes/prism.css";
 import "./AddSnippet.css";
-
 
 class AddSnippet extends Component {
   constructor(props) {
@@ -35,6 +33,7 @@ class AddSnippet extends Component {
       note: "",
       language_id: "4",
       language_alias: "js",
+      error: null,
     };
   }
 
@@ -84,6 +83,19 @@ class AddSnippet extends Component {
       .then((response) => {
         console.log(response);
         this.props.history.push("/dashboard");
+      })
+      .catch((err) => {
+        if (err.response) {
+          this.setState({
+            ...this.state,
+            error: err.response.data.error,
+          });
+        } else {
+          this.setState({
+            ...this.state,
+            error: "Something went wrong",
+          });
+        }
       });
   };
 
@@ -123,6 +135,9 @@ class AddSnippet extends Component {
                 overflow: "auto",
               }}
             />
+            <p className="help is-danger">
+              {this.state.error ? this.state.error : ""}
+            </p>
             <br />
             <div className="field has-text-left">
               <label className="label">Note</label>

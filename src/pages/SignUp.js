@@ -42,9 +42,11 @@ function SignUp(props) {
         props.history.push("/dashboard");
       })
       .catch((err) => {
-        console.log(
-          err.response ? err.response.data.error : "Something went wrong"
-        );
+        if (err.response) {
+          setError(err.response.data.error);
+        } else {
+          setError("Something went wrong");
+        }
       });
   };
 
@@ -110,6 +112,7 @@ function SignUp(props) {
                   <p className="help is-danger">
                     {errors.confirmPassword?.message}
                   </p>
+                  <p className="help is-danger">{error ? error : ""}</p>
                 </div>
 
                 <button className="button is-primary">Sign Up</button>
