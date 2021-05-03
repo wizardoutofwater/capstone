@@ -22,7 +22,7 @@ import "prismjs/components/prism-css";
 // import "prismjs/components/prism-git";
 
 // import "prismjs/themes/prism.css";
-import '../assets/prism-okadia.css';
+import '../assets/css/prism-okadia.css';
 import "./AddSnippet.css";
 
 class AddSnippet extends Component {

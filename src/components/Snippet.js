@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Prism from "prismjs";
-import "../assets/prism-okadia.css";
+import "../assets/css/prism-okadia.css";
 import { supportedLanguages, languageAlias } from "../supported-languages";
 import "./Snippet.css";
 
