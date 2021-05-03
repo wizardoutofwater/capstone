@@ -2,7 +2,6 @@
   "name": "capstone",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
   "dependencies": {
     "@hookform/resolvers": "^2.4.0",
     "@testing-library/jest-dom": "^5.11.10",
