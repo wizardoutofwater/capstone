@@ -3,5 +3,6 @@
     
 } */
 .Snippet {
+    width: max-content;
     max-width: 70vw;
 } 

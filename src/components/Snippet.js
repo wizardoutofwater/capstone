@@ -1,46 +1,36 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Prism from "prismjs";
+import { supportedLanguages, languageAlias } from "../supported-languages";
+import "./Snippet.css";
 
+function Snippet({ id, title, code, note, langId }) {
+  const [languageName, setLanguageName] = useState(null);
 
-export class Snippet extends Component {
+  useEffect(() => {
+    let languageName = languageAlias[langId.toString()];
+    // console.log(languageName);
+    languageName = `language-${languageName}`;
 
-  componentDidMount() {
+    setLanguageName(languageName);
+  }, []);
+
+  useEffect(() => {
     Prism.highlightAll();
-  }
+  });
 
-  render() {
-    return (
-      <div className='Snippet'> 
-        <pre>
-          <code className="language-javascript">
-            {`
-    /* Sample js below formatted with Prism */
-    onSubmit(e) {
-      e.preventDefault();
-      const job = {
-        title: 'Developer',
-        company: 'Facebook' 
-        };
-      }
-  `}
-          </code>
-        </pre>
+  return (
+    <div key={id} className="Snippet mb-2">
+      <div className="box">
+        <h5 className="subtitle">{title}</h5>
+        <div className="card-body">
+          <pre>
+            <code className={languageName}>{code}</code>
+          </pre>
+          <p>{note}</p>
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-// function Snippet(props){
-//   const snippetList = props.snippets.map((snippet) =>
-//   <div key={snippet.id}>
-//     <h3>{snippet.title}</h3>
-//     <pre><code>{snippet.code}</code></pre>
-//     <p>{snippet.note}</p>
-//   </div>
-// );
-// return (
-//   {snippetList}
-// )
-// }
-export default Snippet
-
+export default Snippet;
