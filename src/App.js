@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App">
       <Header token={token} setToken={setToken} />
-      <div className="section main-content">
+      <div className="container">
         <Switch>
           <Route exact path="/">
             {/* <Landing /> */}

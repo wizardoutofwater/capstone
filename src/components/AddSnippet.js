@@ -21,7 +21,8 @@ import "prismjs/components/prism-css";
 // import "prismjs/components/prism-java";
 // import "prismjs/components/prism-git";
 
-import "prismjs/themes/prism.css";
+// import "prismjs/themes/prism.css";
+import '../assets/css/prism-okadia.css';
 import "./AddSnippet.css";
 
 class AddSnippet extends Component {
@@ -129,8 +130,10 @@ class AddSnippet extends Component {
               placeholder="//paste your code here..."
               style={{
                 fontFamily: '"Fira Code", "Fira Mono", monospace',
-                fontSize: 12,
-                backgroundColor: "#F5F5F5",
+                fontSize: ".8rem",
+                // backgroundColor: "#F5F5F5",
+                backgroundColor: "#282822",   
+                borderRadius: ".33rem"       ,
                 minHeight: "20em",
                 overflow: "auto",
               }}
