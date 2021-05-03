@@ -1,7 +1,7 @@
-const faker = require("faker");
-("use strict");
 
-language_array = [
+
+
+let language_array = [
   "language-markup",
   "language-css",
   "language-clike",
