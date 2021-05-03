@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Prism from "prismjs";
-import '../assets/prism-okadia.css'
+import "../assets/prism-okadia.css";
 import { supportedLanguages, languageAlias } from "../supported-languages";
 import "./Snippet.css";
 
@@ -20,23 +20,42 @@ function Snippet({ id, title, code, note, langId, langName }) {
   }, []);
 
   return (
-    <div key={id} className="Snippet mb-2">
+    <div key={id} className="Snippet mb-4">
       <div className="box">
-      <div>
-        <h5 className="title">{title}</h5>
-        <div className="control">
-          <div className="tags has-addons">
-            <span className="butag is-dark">{langName}</span>
-            <span className="butag is-info">0.9.2</span>
+        <div className="columns is-vcentered">
+          <div className="column">
+            <h5 className="title is-size-4">{title}</h5>
           </div>
-        </div>
+          <div className="control">
+            <div className="tags has-addons is-right">
+              <span className="butag is-info is-light">{langName}</span>
+              <span
+                onClick={() => {
+                  navigator.clipboard.writeText(code);
+                }}
+                className="butag is-light is-clickable"
+              >
+                COPY
+              </span>
+            </div>
+          </div>
         </div>
 
         <div className="card-body">
           <pre>
             <code className={`language-${langName}`}>{code}</code>
           </pre>
-          <p>{note}</p>
+          <div className="columns is-vcentered">
+            <div className="column">
+              <p>{note}</p>
+            </div>
+          </div>
+          <div className=" ">
+            <div className="buttons is-right">
+              <button className="button is-primary  is-small">Edit</button>
+              <button className="button is-small">Delete</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
