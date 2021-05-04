@@ -29,7 +29,7 @@ function Login(props) {
         console.log(response);
         localStorage.setItem("user-token", response.data.accessToken);
         props.updateToken(response.data.accessToken);
-        props.history.push("/dashboard");
+        props.history.push("/dashboard/add");
       })
       .catch((err) => {
         if (err.response) {

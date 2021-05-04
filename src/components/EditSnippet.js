@@ -25,7 +25,7 @@ import "prismjs/components/prism-css";
 import '../assets/css/prism-okadia.css';
 import "./AddSnippet.css";
 
-class AddSnippet extends Component {
+class EditSnippet extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,7 +83,7 @@ class AddSnippet extends Component {
       .post("/api/user/snippets", data, { headers })
       .then((response) => {
         console.log(response);
-        this.props.history.push("/dashboard/library");
+        this.props.history.push("/dashboard");
       })
       .catch((err) => {
         if (err.response) {
@@ -102,7 +102,7 @@ class AddSnippet extends Component {
 
   render() {
     return (
-      <div className="AddSnippet">
+      <div className="EditSnippet">
         {/* maybe swap this component for a different code editor -- or add in react-prism-renderer*/}
         <div className="box">
           <form>
@@ -200,4 +200,4 @@ class AddSnippet extends Component {
   }
 }
 
-export default AddSnippet;
+export default EditSnippet;

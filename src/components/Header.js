@@ -75,7 +75,7 @@ function Header({ token, setToken }) {
 
             {token && token !== "" ? <hr className="navdivider"></hr> : ""}
 
-            {token && token !== "" ? (
+            {/* {token && token !== "" ? (
               <NavLink to="/dashboard" className="navbar-item">
                 <span className="icon">
                   <i className="far fa-user"></i>
@@ -84,7 +84,7 @@ function Header({ token, setToken }) {
               </NavLink>
             ) : (
               ""
-            )}
+            )} */}
 
             {token && token !== "" ? (
               <Link to="/login" className="navbar-item" onClick={_logOut}>
