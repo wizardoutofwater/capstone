@@ -14,7 +14,6 @@ function Library(props) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${props.token}`,
     };
-    console.log(headers);
     axios.get("/api/user/snippets", { headers }).then((response) => {
       console.log(response);
       setSnippetsResponse(response.data.snippets);
@@ -24,13 +23,21 @@ function Library(props) {
   }, [props.token]);
 
   const renderSnippets = () => {
-    if (
-      !snippetsResponse ||
-      snippetsResponse === null ||
-      snippetsResponse === []
-    ) {
+    // if null render nothing, this will help the flashing issues
+    if (snippetsResponse === null) {
       return;
-      //   return <div>No Snippets in Library</div>;
+    }
+    if (!snippetsResponse || snippetsResponse.length == 0) {
+      return (
+        <div className="columns is-vcentered has-text-centered pt-5 mt-5">
+          <div className="column">
+            <h5 className="title is-size-4">
+              Your library is empty. Add a snippet to start collecting useful
+              code bits and say goodbye to bookmarks!
+            </h5>
+          </div>
+        </div>
+      );
     }
     return (
       <>
