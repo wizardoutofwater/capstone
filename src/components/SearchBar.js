@@ -23,7 +23,7 @@ class SearchBar extends Component {
 
   _handleClick = (event) => {
     event.preventDefault();
-    if (this.state.title == "") {
+    if (this.state.title === "") {
       this.setState({
         ...this.state,
         validation: "Must enter a value to search",
@@ -68,7 +68,7 @@ class SearchBar extends Component {
         </div>
       );
     }
-    if (this.state.snippetsResponse == "No results found") {
+    if (this.state.snippetsResponse === "No results found") {
       return (
         <div className="columns is-vcentered has-text-centered pt-5">
           <div className="column">

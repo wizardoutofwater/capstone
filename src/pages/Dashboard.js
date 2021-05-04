@@ -7,7 +7,7 @@ import Search from "../components/Search";
 import Library from "../components/Library";
 
 function Dashboard({ token }) {
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
   return (
     <div className="Dashboard">

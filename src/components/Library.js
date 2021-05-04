@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Prism from "prismjs";
 import Snippet from "./Snippet";
-import { supportedLanguages, languageAlias } from "../supported-languages";
+import { languageAlias } from "../supported-languages";
 import "./Library.css";
 
 function Library(props) {
@@ -15,7 +14,7 @@ function Library(props) {
       Authorization: `Bearer ${props.token}`,
     };
     axios.get("/api/user/snippets", { headers }).then((response) => {
-      console.log(response);
+      
       setSnippetsResponse(response.data.snippets);
     });
 
@@ -27,7 +26,7 @@ function Library(props) {
     if (snippetsResponse === null) {
       return;
     }
-    if (!snippetsResponse || snippetsResponse.length == 0) {
+    if (!snippetsResponse || snippetsResponse.length === 0) {
       return (
         <div className="columns is-vcentered has-text-centered pt-5 mt-5">
           <div className="column">

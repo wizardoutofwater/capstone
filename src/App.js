@@ -1,18 +1,14 @@
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
 
-import React, { useState, useEffect} from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom';
+import Header from "./components/Header";
+import Landing from "./pages/Landing";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
-import Header from './components/Header';
-import Landing from './pages/Landing';
-import  SignUp from './pages/SignUp';
-import  Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-
-// import 'bulma';
-import './App.sass';
-import './App.css';
-
-
+import "./App.sass";
+import "./App.css";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -31,7 +27,6 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Landing />
-            
           </Route>
           <Route
             path="/login"

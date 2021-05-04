@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -36,7 +36,6 @@ function SignUp(props) {
     axios
       .post("/api/signup", data, { headers })
       .then((response) => {
-        console.log(response);
         localStorage.setItem("user-token", response.data.accessToken);
         props.updateToken(response.data.accessToken);
         props.history.push("/dashboard/add");
