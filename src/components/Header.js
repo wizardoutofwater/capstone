@@ -56,12 +56,24 @@ function Header({ token, setToken }) {
               <NavLink
                 to="dashboard/library"
                 className="navbar-item is-hidden-tablet"
-                href="#evScaleInfo"
-              >
+                 >
                 <span className="icon">
                   <i className="fas fa-code"></i>
                 </span>
                 <span>Library</span>
+              </NavLink>
+            ) : (
+              ""
+            )}
+            {token && token !== "" ? (
+              <NavLink
+                to="dashboard/search"
+                className="navbar-item is-hidden-tablet"
+                 >
+                <span className="icon">
+                  <i className="fas fa-search"></i>
+                </span>
+                <span>Search</span>
               </NavLink>
             ) : (
               ""
