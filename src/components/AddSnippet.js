@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Editor from "react-simple-code-editor";
 import axios from "axios";
 
-import { supportedLanguages, languageAlias } from "../supported-languages";
+import { languageAlias } from "../supported-languages";
 import { highlight, languages } from "prismjs/components/prism-core";
 
 import "prismjs/components/prism-clike";
