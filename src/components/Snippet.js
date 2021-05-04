@@ -6,6 +6,7 @@ import { supportedLanguages, languageAlias } from "../supported-languages";
 import "./Snippet.css";
 
 function Snippet({ id, title, code, note, langId, langName, token }) {
+  const [copied, setCopied] = useState(false);
   // const [languageName, setLanguageName] = useState(null);
 
   // useEffect(() => {
@@ -50,10 +51,16 @@ function Snippet({ id, title, code, note, langId, langName, token }) {
               <span
                 onClick={() => {
                   navigator.clipboard.writeText(code);
+                  setCopied(true);
+                  setTimeout(() => {
+                    setCopied(false);
+                  }, 1000);
                 }}
-                className="butag is-light is-clickable"
+                className={
+                  copied ? "butag is-primary" : "butag is-light is-clickable"
+                }
               >
-                COPY
+                {copied ? "COPIED" : "COPY"}
               </span>
             </div>
           </div>
