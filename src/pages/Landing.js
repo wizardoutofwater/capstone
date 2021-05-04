@@ -45,6 +45,7 @@ function Landing() {
                   src={landingImage}
                   alt="stylized person sitting at computer looking at code"
                 />
+                <p className="help">Illustration by <a href="https://icons8.com/illustrations/author/60312013123f993d795ce208">Oleg Shcherba</a> from <a href="https://icons8.com/illustrations">Ouch!</a></p>
                 {/* <div className="">@username</div> */}
               </figure>
             </div>
