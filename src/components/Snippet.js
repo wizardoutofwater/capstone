@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Prism from "prismjs";
 import axios from "axios";
 import "../assets/css/prism-okadia.css";
@@ -8,11 +8,7 @@ import "./Snippet.css";
 function Snippet({ id, title, code, note, langId, langName, token }) {
   const [copied, setCopied] = useState(false);
 
-
   const _handleClick = (event) => {
-    console.log(title);
-    console.log(`delete clicked for ${id}`);
-
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,

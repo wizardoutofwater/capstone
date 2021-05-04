@@ -14,7 +14,7 @@ function Library(props) {
       Authorization: `Bearer ${props.token}`,
     };
     axios.get("/api/user/snippets", { headers }).then((response) => {
-      console.log(response);
+      
       setSnippetsResponse(response.data.snippets);
     });
 

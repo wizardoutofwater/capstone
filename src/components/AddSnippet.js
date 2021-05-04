@@ -41,9 +41,9 @@ class AddSnippet extends Component {
   // if updating language selection, this grabs the language alias using its ID
   componentDidUpdate(prevProps, prevState) {
     if (prevState.language_id !== this.state.language_id) {
-      console.log("updating language alias");
+      
       let selectedLanguage = languageAlias[this.state.language_id];
-      console.log(selectedLanguage);
+      
       this.setState({
         ...this.state,
         language_alias: selectedLanguage,
@@ -52,7 +52,7 @@ class AddSnippet extends Component {
   }
 
   _handleUpdate = (field, val) => {
-    console.log("setting updated. value:" + val);
+    
 
     this.setState({
       ...this.state,
@@ -72,9 +72,9 @@ class AddSnippet extends Component {
   };
 
   onSubmit = (data) => {
-    console.log("data " + data);
+    
     data = JSON.stringify(data);
-    console.log(data);
+ 
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.props.token}`,
@@ -82,7 +82,7 @@ class AddSnippet extends Component {
     axios
       .post("/api/user/snippets", data, { headers })
       .then((response) => {
-        console.log(response);
+ 
         this.props.history.push("/dashboard/library");
       })
       .catch((err) => {
