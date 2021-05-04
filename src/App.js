@@ -3,6 +3,7 @@ import React, { useState, useEffect} from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
+import Landing from './pages/Landing';
 import  SignUp from './pages/SignUp';
 import  Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -29,8 +30,8 @@ function App() {
       <div className="container">
         <Switch>
           <Route exact path="/">
-            {/* <Landing /> */}
-            <h1>this will be the homePage</h1>
+            <Landing />
+            
           </Route>
           <Route
             path="/login"
