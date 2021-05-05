@@ -54,7 +54,7 @@ function Header({ token, setToken }) {
             )}
             {token && token !== "" ? (
               <NavLink
-                to="dashboard/library"
+                to="/dashboard/library"
                 className="navbar-item is-hidden-tablet"
                  >
                 <span className="icon">
@@ -67,7 +67,7 @@ function Header({ token, setToken }) {
             )}
             {token && token !== "" ? (
               <NavLink
-                to="dashboard/search"
+                to="/dashboard/search"
                 className="navbar-item is-hidden-tablet"
                  >
                 <span className="icon">
