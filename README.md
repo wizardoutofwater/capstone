@@ -8,7 +8,7 @@ Sign up and start snipping today! [Snippit](https://snippit-good.herokuapp.com/s
 
 **Snippit in action!**
 
-![Add snippit gif](src/assets/add-snippit.gif)
+![Add snippit gif](https://media.giphy.com/media/mkP6iUusZAvSdOnAtp/giphy.gif)
 
 ## Built With
 
