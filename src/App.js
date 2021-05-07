@@ -24,8 +24,6 @@ function App() {
     }
   }, []);
 
-  console.log("token from page load", token);
-
   return (
     <div className="App">
       <Header token={token} setToken={setToken} />
