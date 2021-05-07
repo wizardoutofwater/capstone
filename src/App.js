@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import Header from "./components/Header";
 import Landing from "./pages/Landing";
@@ -38,6 +38,14 @@ function App() {
           ></Route>
           <Route path="/dashboard">
             <Dashboard token={token} />
+          </Route>
+
+          <Route path="/dashboard">
+            {token && token != "" ? (
+              <Dashboard token={token} />
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Route>
         </Switch>
       </div>
