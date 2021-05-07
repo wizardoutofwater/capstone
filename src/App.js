@@ -11,7 +11,11 @@ import "./App.sass";
 import "./App.css";
 
 function App() {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(
+    localStorage.getItem("user-token")
+      ? localStorage.getItem("user-token")
+      : null
+  );
 
   useEffect(() => {
     let token = localStorage.getItem("user-token");
@@ -19,6 +23,8 @@ function App() {
       setToken(token);
     }
   }, []);
+
+  console.log("token from page load", token);
 
   return (
     <div className="App">
