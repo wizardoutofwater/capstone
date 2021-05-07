@@ -37,10 +37,6 @@ function App() {
             render={(props) => <SignUp {...props} updateToken={setToken} />}
           ></Route>
           <Route path="/dashboard">
-            <Dashboard token={token} />
-          </Route>
-
-          <Route path="/dashboard">
             {token && token != "" ? (
               <Dashboard token={token} />
             ) : (
