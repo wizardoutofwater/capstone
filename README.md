@@ -4,7 +4,7 @@
 
 Snippit is an application that helps you keep track of useful code snippits you find on your developer journey. Build your library by adding the useful code snippets you find yourself using over and over. Keep track of those cool tricks you read on a blog, yet can never seem to find again. Skip the bookmarks, save it to Snippit instead!
 
-Sign up and start snipping today! [Snippit](https://snippit-good.herokuapp.com/signup)
+Sign up and start snipping today! [Snippit](https://www.snippitgood.com/signup)
 
 **Snippit in action!**
 
