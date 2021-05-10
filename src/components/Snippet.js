@@ -61,7 +61,7 @@ function Snippet({ id, title, code, note, langId, langName, token }) {
                   }, 1000);
                 }}
                 className={
-                  markdown ? "butag is-success" : "butag is-link is-clickable"
+                  markdown ? "butag is-primary" : "butag is-link is-clickable"
                 }
               >
                 {markdown ? "Copied to Markdown" : "Copy to Markdown"}
