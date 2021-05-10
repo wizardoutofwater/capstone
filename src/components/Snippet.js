@@ -7,6 +7,7 @@ import "./Snippet.css";
 
 function Snippet({ id, title, code, note, langId, langName, token }) {
   const [copied, setCopied] = useState(false);
+  const [markdown, setMarkdown] = useState(false);
 
   const _handleClick = (event) => {
     const headers = {
@@ -48,7 +49,22 @@ function Snippet({ id, title, code, note, langId, langName, token }) {
                   copied ? "butag is-primary" : "butag is-light is-clickable"
                 }
               >
-                {copied ? "COPIED" : "COPY"}
+                {copied ? "Copied to Clipboard" : "Copy to Clipboard"}
+              </span>
+              <span
+                onClick={() => {
+                  let markDownCode = "```\n" + code + "\n```";
+                  navigator.clipboard.writeText(markDownCode);
+                  setMarkdown(true);
+                  setTimeout(() => {
+                    setMarkdown(false);
+                  }, 1000);
+                }}
+                className={
+                  markdown ? "butag is-success" : "butag is-link is-clickable"
+                }
+              >
+                {markdown ? "Copied to Markdown" : "Copy to Markdown"}
               </span>
             </div>
           </div>
