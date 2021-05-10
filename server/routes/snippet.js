@@ -62,7 +62,7 @@ router.post("/api/user/snippets", authenticateToken, (req, res) => {
   console.log(error);
   if (!valid) {
     res.status(400).json({
-      error: "Invalid request",
+      error: error.details[0].message,
     });
   } else {
     db.snippet
@@ -92,7 +92,7 @@ router.put("/api/user/snippets/:id", authenticateToken, (req, res) => {
   const valid = error == null;
   if (!valid) {
     res.status(400).json({
-      error: "Invalid request",
+      error: error.details.message,
     });
   } else {
     db.snippet
