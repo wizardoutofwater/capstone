@@ -1,13 +1,17 @@
 import React from "react";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
 import SideNav from "../components/SideNav";
 import Main from "../components/Main";
 import AddSnippet from "../components/AddSnippet";
 import Search from "../components/Search";
 import Library from "../components/Library";
+import EditSnippet from "../components/EditSnippet";
 
 function Dashboard({ token }) {
   let { path } = useRouteMatch();
+  // let { id } = useParams();
+
+  // console.log(id);
 
   return (
     <div className="Dashboard">
@@ -22,6 +26,11 @@ function Dashboard({ token }) {
                 path={`${path}/add`}
                 render={(props) => <AddSnippet {...props} token={token} />}
               />
+                <Route    // proabbly need to look @ using useRouteMatch
+                path={`${path}/snippet/:id`}
+                 render={(props) => <EditSnippet {...props} token={token}/>}
+                />              
+              
               <Route
                 path={`${path}/search`}
                 render={(props) => <Search {...props} token={token} />}
