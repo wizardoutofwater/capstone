@@ -50,16 +50,15 @@ class EditSnippet extends Component {
     axios
       .get(`/api/user/snippets/${this.state.id}`, { headers })
       .then((response) => {
-        console.log(response.data);
-        
-        let resLangId = response.data.snippet.language_id;
+       
+        let resLangId = response.data.snippet.language_id;  //We should look at storing all the ID as numbers
         resLangId = resLangId.toString();
         console.log(resLangId)
         this.setState({
           
           title: response.data.snippet.title,
           code: response.data.snippet.snippet,
-          // note: response.data.snippet.note,
+          note: response.data.snippet.note,
           language_id: resLangId,
           // language_alias: languageAlias[response.data.snippet.language_id],
         });
@@ -133,12 +132,13 @@ class EditSnippet extends Component {
               <label className="label">Title</label>
               <div className="control">
                 <input
+                  defaultValue = {this.state.title}
                   onBlur={(event) =>
                     this._handleUpdate("title", event.target.value)
                   }
                   className="input"
                   type="text"
-                  placeholder="Give your snippit a title..."
+                 
                 />
               </div>
             </div>
@@ -169,6 +169,7 @@ class EditSnippet extends Component {
               <label className="label">Note</label>
               <div className="control">
                 <textarea
+                  defaultValue = {this.state.note}
                   onBlur={(event) =>
                     this._handleUpdate("note", event.target.value)
                   }
@@ -212,7 +213,7 @@ class EditSnippet extends Component {
                   onClick={(event) => this._handleClick(event)}
                   type="submit"
                 >
-                  Add To Library
+                  Save
                 </button>
               </div>
             </div>
