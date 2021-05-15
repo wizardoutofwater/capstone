@@ -95,10 +95,10 @@ function Library(props) {
         >
           <span className="icon">
             <i
-              className={listView ? "fas fa-list" : "fas fa-grip-horizontal"}
+              className={!listView ? "fas fa-list" : "fas fa-grip-horizontal"}
             ></i>
           </span>
-          <span>{listView ? "List View" : "Grid View"}</span>
+          <span>{!listView ? "List View" : "Grid View"}</span>
         </button>
       </div>
 
