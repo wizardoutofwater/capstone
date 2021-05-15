@@ -1,0 +1,30 @@
+.EditSnippet .box {
+    /* width: max-content; */
+    max-width: 100%;
+    min-width: 40vw;
+    min-height: 10em;
+    overflow:auto;
+}
+
+.EditSnippet pre, .EditSnippet textarea {
+    overflow: auto;
+    word-break: normal;
+    /* border-radius:1em; */
+}
+.EditSnippet pre {
+    color:#F6F6F0;
+}
+/* .AddSnippet .number {
+     align-items: inherit; 
+     background-color: inherit; 
+     border-radius: inherit; 
+     display: inherit; 
+     font-size: inherit; 
+     height: inherit; 
+     justify-content: inherit; 
+     margin-right: 0; 
+     min-width: 0; 
+     padding: 0; 
+     text-align: inherit; 
+     vertical-align: inherit; 
+} */

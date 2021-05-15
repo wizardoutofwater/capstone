@@ -22,8 +22,8 @@ import "prismjs/components/prism-css";
 // import "prismjs/components/prism-git";
 
 // import "prismjs/themes/prism.css";
-import '../assets/css/prism-okadia.css';
-import "./AddSnippet.css";
+import "../assets/css/prism-okadia.css";
+import "./EditSnippet.css";
 
 class EditSnippet extends Component {
   constructor(props) {
@@ -34,16 +34,43 @@ class EditSnippet extends Component {
       note: "",
       language_id: "4",
       language_alias: "js",
+      id: props.match.params.id,
       error: null,
     };
+  }
+
+  componentDidMount() {
+    console.log("edit snippet mounted");
+    console.log(this.state.id);
+    if (!this.props.token) return;
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.props.token}`,
+    };
+    axios
+      .get(`/api/user/snippets/${this.state.id}`, { headers })
+      .then((response) => {
+        console.log(response.data);
+        
+        let resLangId = response.data.snippet.language_id;
+        resLangId = resLangId.toString();
+        console.log(resLangId)
+        this.setState({
+          
+          title: response.data.snippet.title,
+          code: response.data.snippet.snippet,
+          // note: response.data.snippet.note,
+          language_id: resLangId,
+          // language_alias: languageAlias[response.data.snippet.language_id],
+        });
+      });
   }
 
   // if updating language selection, this grabs the language alias using its ID
   componentDidUpdate(prevProps, prevState) {
     if (prevState.language_id !== this.state.language_id) {
-      
       let selectedLanguage = languageAlias[this.state.language_id];
-      
+
       this.setState({
         ...this.state,
         language_alias: selectedLanguage,
@@ -52,8 +79,6 @@ class EditSnippet extends Component {
   }
 
   _handleUpdate = (field, val) => {
-    
-
     this.setState({
       ...this.state,
       [field]: val,
@@ -72,9 +97,8 @@ class EditSnippet extends Component {
   };
 
   onSubmit = (data) => {
-    
     data = JSON.stringify(data);
-    
+
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.props.token}`,
@@ -82,7 +106,6 @@ class EditSnippet extends Component {
     axios
       .post("/api/user/snippets", data, { headers })
       .then((response) => {
-        
         this.props.history.push("/dashboard");
       })
       .catch((err) => {
@@ -132,8 +155,8 @@ class EditSnippet extends Component {
                 fontFamily: '"Fira Code", "Fira Mono", monospace',
                 fontSize: ".8rem",
                 // backgroundColor: "#F5F5F5",
-                backgroundColor: "#282822",   
-                borderRadius: ".33rem"       ,
+                backgroundColor: "#282822",
+                borderRadius: ".33rem",
                 minHeight: "20em",
                 overflow: "auto",
               }}
