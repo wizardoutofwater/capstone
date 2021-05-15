@@ -94,9 +94,11 @@ function Library(props) {
           }}
         >
           <span className="icon">
-            <i className="fas fa-list"></i>
+            <i
+              className={listView ? "fas fa-list" : "fas fa-grip-horizontal"}
+            ></i>
           </span>
-          <span>List View</span>
+          <span>{listView ? "List View" : "Grid View"}</span>
         </button>
       </div>
 
