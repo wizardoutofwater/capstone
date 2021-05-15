@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Prism from "prismjs";
 import axios from "axios";
 import "../assets/css/prism-okadia.css";
@@ -8,6 +9,7 @@ import "./Snippet.css";
 function Snippet({ id, title, code, note, langId, langName, token }) {
   const [copied, setCopied] = useState(false);
   const [markdown, setMarkdown] = useState(false);
+  let history= useHistory();
 
   const _handleClick = (event) => {
     const headers = {
@@ -89,6 +91,14 @@ function Snippet({ id, title, code, note, langId, langName, token }) {
               >
                 Delete
               </button>
+              <button
+                id={id}
+                onClick={() => {history.push(`/dashboard/snippet/${id}`) }}
+                className="button is-small"
+              >
+                Edit
+              </button>
+             
             </div>
           </div>
         </div>
