@@ -1,4 +1,7 @@
-.Library pre{
-    text-align: left;
-    
+.Library pre {
+  text-align: left;
+}
+
+.flex-right {
+  flex-direction: row-reverse;
 }
