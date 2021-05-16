@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Snippet from "./Snippet";
+import ListSnippit from "./ListSnippet";
 import { languageAlias } from "../supported-languages";
 import "./Library.css";
 
 function Library(props) {
   const [snippetsResponse, setSnippetsResponse] = useState(null);
+  const [listView, isListView] = useState(false);
 
   useEffect(() => {
     if (!props.token) return;
@@ -14,7 +16,6 @@ function Library(props) {
       Authorization: `Bearer ${props.token}`,
     };
     axios.get("/api/user/snippets", { headers }).then((response) => {
-      
       setSnippetsResponse(response.data.snippets);
     });
 
@@ -23,6 +24,7 @@ function Library(props) {
 
   const renderSnippets = () => {
     // if null render nothing, this will help the flashing issues
+
     if (snippetsResponse === null) {
       return;
     }
@@ -38,26 +40,70 @@ function Library(props) {
         </div>
       );
     }
-    return (
-      <>
-        {snippetsResponse.map((snippet) => {
-          let languageName = languageAlias[snippet.language_id.toString()];
-          return (
-            <Snippet
-              key={snippet.id}
-              id={snippet.id}
-              title={snippet.title}
-              code={snippet.snippet}
-              note={snippet.note}
-              langId={snippet.language_id}
-              langName={languageName}
-              token={props.token}
-            />
-          );
-        })}
-      </>
-    );
+
+    if (!listView) {
+      return (
+        <>
+          {snippetsResponse.map((snippet) => {
+            let languageName = languageAlias[snippet.language_id.toString()];
+            return (
+              <Snippet
+                key={snippet.id}
+                id={snippet.id}
+                title={snippet.title}
+                code={snippet.snippet}
+                note={snippet.note}
+                langId={snippet.language_id}
+                langName={languageName}
+                token={props.token}
+              />
+            );
+          })}
+        </>
+      );
+    } else {
+      return (
+        <>
+          {snippetsResponse.map((snippet) => {
+            let languageName = languageAlias[snippet.language_id.toString()];
+            return (
+              <ListSnippit
+                key={snippet.id}
+                id={snippet.id}
+                title={snippet.title}
+                code={snippet.snippet}
+                note={snippet.note}
+                langId={snippet.language_id}
+                langName={languageName}
+                token={props.token}
+              />
+            );
+          })}
+        </>
+      );
+    }
   };
-  return <>{renderSnippets()}</>;
+  return (
+    <>
+      <div className="is-flex flex-right">
+        <button
+          className="button d-shadow mb-4"
+          onClick={(event) => {
+            event.preventDefault();
+            isListView(!listView);
+          }}
+        >
+          <span className="icon">
+            <i
+              className={!listView ? "fas fa-list" : "fas fa-grip-horizontal"}
+            ></i>
+          </span>
+          <span>{!listView ? "List View" : "Grid View"}</span>
+        </button>
+      </div>
+
+      {renderSnippets()}
+    </>
+  );
 }
 export default Library;
