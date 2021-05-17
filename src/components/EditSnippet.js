@@ -50,12 +50,10 @@ class EditSnippet extends Component {
     axios
       .get(`/api/user/snippets/${this.state.id}`, { headers })
       .then((response) => {
-       
-        let resLangId = response.data.snippet.language_id;  //We should look at storing all the ID as numbers
+        let resLangId = response.data.snippet.language_id; //We should look at storing all the ID as numbers
         resLangId = resLangId.toString();
-        console.log(resLangId)
+        console.log(resLangId);
         this.setState({
-          
           title: response.data.snippet.title,
           code: response.data.snippet.snippet,
           note: response.data.snippet.note,
@@ -86,13 +84,13 @@ class EditSnippet extends Component {
 
   _handleClick = (event) => {
     event.preventDefault();
-    let newSnippet = {
+    let updatedSnippet = {
       title: this.state.title,
       snippet: this.state.code,
       note: this.state.note,
       language_id: this.state.language_id,
     };
-    this.onSubmit(newSnippet);
+    this.onSubmit(updatedSnippet);
   };
 
   onSubmit = (data) => {
@@ -103,9 +101,10 @@ class EditSnippet extends Component {
       Authorization: `Bearer ${this.props.token}`,
     };
     axios
-      .post("/api/user/snippets", data, { headers })
+      .put(`/api/user/snippets/${this.state.id}`, data, { headers })
       .then((response) => {
-        this.props.history.push("/dashboard");
+        
+        this.props.history.push("/dashboard/library");
       })
       .catch((err) => {
         if (err.response) {
@@ -132,13 +131,12 @@ class EditSnippet extends Component {
               <label className="label">Title</label>
               <div className="control">
                 <input
-                  defaultValue = {this.state.title}
+                  defaultValue={this.state.title}
                   onBlur={(event) =>
                     this._handleUpdate("title", event.target.value)
                   }
                   className="input"
                   type="text"
-                 
                 />
               </div>
             </div>
@@ -169,7 +167,7 @@ class EditSnippet extends Component {
               <label className="label">Note</label>
               <div className="control">
                 <textarea
-                  defaultValue = {this.state.note}
+                  defaultValue={this.state.note}
                   onBlur={(event) =>
                     this._handleUpdate("note", event.target.value)
                   }
