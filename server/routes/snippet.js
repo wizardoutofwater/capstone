@@ -9,12 +9,19 @@ router.use(express.json());
 
 //define schema for snippet routes
 
-let snippetSchema = joi.object().keys({
+let addSnippetSchema = joi.object().keys({
   title: joi.string().empty(""),
   note: joi.string().empty(""),
   snippet: joi.string().required(),
   language_id: joi.number().required(),
   user_id: joi.number().required(),
+});
+
+let updateSnippetSchema = joi.object().keys({
+  title: joi.string().empty(""),
+  note: joi.string().empty(""),
+  snippet: joi.string().required(),
+  language_id: joi.number().required(),
 });
 
 router.get("/api/user/snippets", authenticateToken, (req, res) => {
@@ -34,18 +41,22 @@ router.get("/api/user/snippets", authenticateToken, (req, res) => {
 });
 
 router.get("/api/user/snippets/:id", authenticateToken, (req, res) => {
-  console.log(req.params)
+  console.log(req.params);
   let snippet_id = req.params.id;
-  let user_id = req.user.id
-  console.log('request by user' + user_id)
+  let user_id = req.user.id;
+  console.log("request by user" + user_id);
   db.snippet
     .findByPk(snippet_id)
     .then((data) => {
+      console.log(data);
+      if (data.user_id !== user_id) {
+        throw new Error("You don't have permission to view this snippit");
+      }
       return res.status(200).json({ snippet: data });
     })
     .catch((err) => {
       res.status(400).json({
-        message: err.parent.detail || "Some error occured",
+        message: err.message || "Some error occured",
       });
     });
 });
@@ -57,7 +68,7 @@ router.post("/api/user/snippets", authenticateToken, (req, res) => {
   // create snippet object for database
   const snippet = req.body;
 
-  const result = snippetSchema.validate(snippet);
+  const result = addSnippetSchema.validate(snippet);
 
   const { value, error } = result;
 
@@ -81,32 +92,38 @@ router.post("/api/user/snippets", authenticateToken, (req, res) => {
   }
 });
 
-router.put("/api/user/snippets/:id", authenticateToken, (req, res) => {
+router.put("/api/user/snippets/:id", authenticateToken, async (req, res) => {
   // assigning the user id to the req body
-  req.body.user_id = req.user.id;
-// added parseInt bc id is a string in params 
+  // req.body.user_id = req.user.id;
+  // added parseInt bc id is a string in params
   let snippet_id = parseInt(req.params.id);
-  console.log(snippet_id)
 
   const snippet = req.body;
 
-  const result = snippetSchema.validate(snippet);
+  const result = updateSnippetSchema.validate(snippet);
 
   const { value, error } = result;
 
   const valid = error == null;
-  console.log(error)
+
+  let owner_id;
+
+  await db.snippet.findByPk(snippet_id).then((data) => {
+    owner_id = data.user_id;
+  });
+
   if (!valid) {
     res.status(400).json({
-      error: error.details.message,
+      error: error.details[0].message,
     });
   } else {
     db.snippet
       .update(snippet, {
         where: { id: snippet_id },
+        user_id: req.user.id,
+        owner_id: owner_id,
       })
       .then((data) => {
-        console.log(data);
         if (data[0] === 1) {
           return res.status(200).json({ success: "Snippet updated!" });
         } else {
@@ -116,19 +133,26 @@ router.put("/api/user/snippets/:id", authenticateToken, (req, res) => {
         }
       })
       .catch((err) => {
-        res.status(500).json({
-          message: err.parent.detail || "Some error occured",
+        res.status(400).json({
+          message: err.message || "Some error occured",
         });
       });
   }
 });
 
-router.delete("/api/user/snippets/:id", authenticateToken, (req, res) => {
+router.delete("/api/user/snippets/:id", authenticateToken, async (req, res) => {
   let snippet_id = req.params.id;
+
+  await db.snippet.findByPk(snippet_id).then((data) => {
+    console.log("found it!");
+    owner_id = data.user_id;
+  });
 
   db.snippet
     .destroy({
       where: { id: snippet_id },
+      user_id: req.user.id,
+      owner_id: owner_id,
     })
     .then((data) => {
       console.log(data);
@@ -142,7 +166,7 @@ router.delete("/api/user/snippets/:id", authenticateToken, (req, res) => {
     })
     .catch((err) => {
       res.status(400).json({
-        message: err.parent.detail || "Some error occured",
+        message: err.message || "Some error occured",
       });
     });
 });

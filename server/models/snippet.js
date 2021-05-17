@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
+
   snippet.init(
     {
       title: DataTypes.STRING,
@@ -32,7 +33,22 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "snippet",
+      hooks: {
+        beforeBulkUpdate: (snippit) => {
+          console.log("hook", snippit);
+          if (snippit.user_id != snippit.owner_id) {
+            throw new Error("You don't have access to edit this snippit");
+          }
+        },
+        beforeBulkDestroy: (snippit) => {
+          console.log("hook", snippit);
+          if (snippit.user_id != snippit.owner_id) {
+            throw new Error("You don't have access to edit this snippit");
+          }
+        },
+      },
     }
   );
+
   return snippet;
 };
