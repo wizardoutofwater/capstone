@@ -41,10 +41,9 @@ router.get("/api/user/snippets", authenticateToken, (req, res) => {
 });
 
 router.get("/api/user/snippets/:id", authenticateToken, (req, res) => {
-  console.log(req.params);
   let snippet_id = req.params.id;
   let user_id = req.user.id;
-  console.log("request by user" + user_id);
+
   db.snippet
     .findByPk(snippet_id)
     .then((data) => {
@@ -93,9 +92,6 @@ router.post("/api/user/snippets", authenticateToken, (req, res) => {
 });
 
 router.put("/api/user/snippets/:id", authenticateToken, async (req, res) => {
-  // assigning the user id to the req body
-  // req.body.user_id = req.user.id;
-  // added parseInt bc id is a string in params
   let snippet_id = parseInt(req.params.id);
 
   const snippet = req.body;
@@ -144,7 +140,6 @@ router.delete("/api/user/snippets/:id", authenticateToken, async (req, res) => {
   let snippet_id = req.params.id;
 
   await db.snippet.findByPk(snippet_id).then((data) => {
-    console.log("found it!");
     owner_id = data.user_id;
   });
 
