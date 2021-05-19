@@ -6,6 +6,7 @@ const pbkdf2 = require("pbkdf2");
 const crypto = require("crypto");
 const db = require("../models");
 const jwt = require("jsonwebtoken");
+const authenticateToken = require("./helper/authenticateToken");
 router.use(express.json());
 
 // functions for create users and find users
@@ -66,7 +67,8 @@ router.post("/api/login", async (req, res) => {
 
 router.post("/api/signup", async (req, res) => {
   // set formats
-  const emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  const emailFormat =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const passwordFormat = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g;
   // grab email and lower case it and password
   let email = req.body.email.toLowerCase();
@@ -127,6 +129,10 @@ router.post("/api/signup", async (req, res) => {
         error: `${err}`,
       });
     });
+});
+
+router.get("/api/tokencheck", authenticateToken, (req, res) => {
+  res.status(200).json({ success: "Token is still valid" });
 });
 
 module.exports = router;
