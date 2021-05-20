@@ -138,6 +138,7 @@ router.put("/api/user/snippets/:id", authenticateToken, async (req, res) => {
 
 router.delete("/api/user/snippets/:id", authenticateToken, async (req, res) => {
   let snippet_id = req.params.id;
+  let owner_id;
 
   await db.snippet.findByPk(snippet_id).then((data) => {
     owner_id = data.user_id;
