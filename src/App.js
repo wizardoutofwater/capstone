@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import axios from "axios";
 
 import "./App.sass";
 import "./App.css";
@@ -21,6 +22,20 @@ function App() {
     let token = localStorage.getItem("user-token");
     if (token) {
       setToken(token);
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+      axios
+        .get("/api/tokencheck", { headers })
+        .then((response) => {
+          return;
+        })
+        .catch((err) => {
+          if (err.response.status === 403 || err.response.status === 401) {
+            setToken("");
+          }
+        });
     }
   }, []);
 
