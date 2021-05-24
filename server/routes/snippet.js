@@ -47,14 +47,13 @@ router.get("/api/user/snippets/:id", authenticateToken, (req, res) => {
   db.snippet
     .findByPk(snippet_id)
     .then((data) => {
-      console.log(data);
       if (data.user_id !== user_id) {
         throw new Error("You don't have permission to view this snippit");
       }
       return res.status(200).json({ snippet: data });
     })
     .catch((err) => {
-      res.status(400).json({
+      res.status(403).json({
         message: err.message || "Some error occured",
       });
     });

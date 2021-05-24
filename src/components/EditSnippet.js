@@ -36,12 +36,11 @@ class EditSnippet extends Component {
       language_alias: "js",
       id: props.match.params.id,
       error: null,
+      authorized: true,
     };
   }
 
   componentDidMount() {
-    console.log("edit snippet mounted");
-    console.log(this.state.id);
     if (!this.props.token) return;
     const headers = {
       "Content-Type": "application/json",
@@ -52,7 +51,6 @@ class EditSnippet extends Component {
       .then((response) => {
         let resLangId = response.data.snippet.language_id; //We should look at storing all the ID as numbers
         resLangId = resLangId.toString();
-        console.log(resLangId);
         this.setState({
           title: response.data.snippet.title,
           code: response.data.snippet.snippet,
@@ -60,6 +58,14 @@ class EditSnippet extends Component {
           language_id: resLangId,
           // language_alias: languageAlias[response.data.snippet.language_id],
         });
+      })
+      .catch((err) => {
+        if (err.response.status === 403) {
+          this.setState({
+            ...this.state,
+            authorized: false,
+          });
+        }
       });
   }
 
@@ -103,7 +109,6 @@ class EditSnippet extends Component {
     axios
       .put(`/api/user/snippets/${this.state.id}`, data, { headers })
       .then((response) => {
-        
         this.props.history.push("/dashboard/library");
       })
       .catch((err) => {
@@ -124,75 +129,83 @@ class EditSnippet extends Component {
   render() {
     return (
       <div className="EditSnippet">
-        {/* maybe swap this component for a different code editor -- or add in react-prism-renderer*/}
         <div className="box">
-          <form>
-            <div className="field has-text-left">
-              <label className="label">Title</label>
-              <div className="control">
-                <input
-                  defaultValue={this.state.title}
-                  onBlur={(event) =>
-                    this._handleUpdate("title", event.target.value)
-                  }
-                  className="input"
-                  type="text"
-                />
+          {!this.state.authorized ? (
+            <div className="columns is-vcentered has-text-centered pt-5">
+              <div className="column">
+                <h5 className="title is-size-4">
+                  You do not have permission to edit this Snippit
+                </h5>
               </div>
             </div>
-            <label className="label has-text-left">Code</label>
-            <Editor
-              value={this.state.code}
-              onValueChange={(code) => this.setState({ code })}
-              highlight={(code) =>
-                highlight(code, languages[this.state.language_alias])
-              }
-              padding={10}
-              placeholder="//paste your code here..."
-              style={{
-                fontFamily: '"Fira Code", "Fira Mono", monospace',
-                fontSize: ".8rem",
-                // backgroundColor: "#F5F5F5",
-                backgroundColor: "#282822",
-                borderRadius: ".33rem",
-                minHeight: "20em",
-                overflow: "auto",
-              }}
-            />
-            <p className="help is-danger">
-              {this.state.error ? this.state.error : ""}
-            </p>
-            <br />
-            <div className="field has-text-left">
-              <label className="label">Note</label>
-              <div className="control">
-                <textarea
-                  defaultValue={this.state.note}
-                  onBlur={(event) =>
-                    this._handleUpdate("note", event.target.value)
-                  }
-                  className="textarea"
-                  name="note"
-                  placeholder="Add a note about this snippet"
-                  rows="4"
-                ></textarea>
-              </div>
-            </div>
-            <div className="field is-grouped is-grouped-right">
-              <div className="control">
-                <div className="select">
-                  <select
-                    value={this.state.language_id}
-                    onChange={(event) =>
-                      this._handleUpdate("language_id", event.target.value)
+          ) : (
+            <form>
+              <div className="field has-text-left">
+                <label className="label">Title</label>
+                <div className="control">
+                  <input
+                    defaultValue={this.state.title}
+                    onBlur={(event) =>
+                      this._handleUpdate("title", event.target.value)
                     }
-                    id="selectLanguage"
-                  >
-                    <option value="1">Markup (HTML)</option>
-                    <option value="2">CSS</option>
-                    <option value="3">C-Like</option>
-                    <option value="4">JavaScript</option>
-                    {/* <option value="5">ASP.NET</option>
+                    className="input"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <label className="label has-text-left">Code</label>
+              <Editor
+                value={this.state.code}
+                onValueChange={(code) => this.setState({ code })}
+                highlight={(code) =>
+                  highlight(code, languages[this.state.language_alias])
+                }
+                padding={10}
+                placeholder="//paste your code here..."
+                style={{
+                  fontFamily: '"Fira Code", "Fira Mono", monospace',
+                  fontSize: ".8rem",
+                  // backgroundColor: "#F5F5F5",
+                  backgroundColor: "#282822",
+                  borderRadius: ".33rem",
+                  minHeight: "20em",
+                  overflow: "auto",
+                }}
+              />
+              <p className="help is-danger">
+                {this.state.error ? this.state.error : ""}
+              </p>
+              <br />
+              <div className="field has-text-left">
+                <label className="label">Note</label>
+                <div className="control">
+                  <textarea
+                    defaultValue={this.state.note}
+                    onBlur={(event) =>
+                      this._handleUpdate("note", event.target.value)
+                    }
+                    className="textarea"
+                    name="note"
+                    placeholder="Add a note about this snippet"
+                    rows="4"
+                  ></textarea>
+                </div>
+              </div>
+              <div className="field is-grouped is-grouped-right">
+                <div className="control">
+                  <div className="select">
+                    <select
+                      value={this.state.language_id}
+                      onChange={(event) =>
+                        this._handleUpdate("language_id", event.target.value)
+                      }
+                      id="selectLanguage"
+                    >
+                      <option value="1">Markup (HTML)</option>
+                      <option value="2">CSS</option>
+                      <option value="3">C-Like</option>
+                      <option value="4">JavaScript</option>
+                      {/* <option value="5">ASP.NET</option>
                     <option value="6">Bash</option>
                     <option value="7">C</option>
                     <option value="8">C#</option>
@@ -202,20 +215,21 @@ class EditSnippet extends Component {
                     <option value="12">JSX (React)</option>
                     <option value="13">Python</option>
                     <option value="14">PHP</option> */}
-                  </select>
+                    </select>
+                  </div>
+                </div>
+                <div className="control">
+                  <button
+                    className="button d-shadow"
+                    onClick={(event) => this._handleClick(event)}
+                    type="submit"
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
-              <div className="control">
-                <button
-                  className="button d-shadow"
-                  onClick={(event) => this._handleClick(event)}
-                  type="submit"
-                >
-                  Save
-                </button>
-              </div>
-            </div>
-          </form>
+            </form>
+          )}
         </div>
       </div>
     );
