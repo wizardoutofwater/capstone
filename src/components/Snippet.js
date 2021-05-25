@@ -77,7 +77,7 @@ function Snippet({ id, title, code, note, langId, langName, token }) {
             <code className={`language-${langName}`}>{code}</code>
           </pre>
           <div className="columns is-vcentered">
-            <div className="column">
+            <div className="column is-four-fifths">
               <p>{note}</p>
             </div>
           </div>
