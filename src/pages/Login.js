@@ -41,6 +41,7 @@ function Login(props) {
 
   return (
     <>
+    <section className="hero is-fullheight-with-navbar is-justify-content-center">
       <div className="sign-up  box has-text-centered">
         <h1 className="title">Log In</h1>
         <div className="columns is-vcentered">
@@ -92,6 +93,7 @@ function Login(props) {
           </div>
         </div>
       </div>
+      </section>
     </>
   );
 }

@@ -51,6 +51,7 @@ function SignUp(props) {
 
   return (
     <>
+    <section className="hero is-fullheight-with-navbar is-justify-content-center">
       <div className="sign-up  box has-text-centered">
         <h1 className="title">Sign Up</h1>
         <div className="columns is-vcentered">
@@ -124,6 +125,7 @@ function SignUp(props) {
           </div>
         </div>
       </div>
+      </section>
     </>
   );
 }
