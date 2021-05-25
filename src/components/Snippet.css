@@ -3,6 +3,11 @@
     
 } */
 .Snippet {
-  width: max-content;
-  max-width: 70vw;
+  width: fit-content;
+
+}
+@media screen and (max-width: 768px) {
+  .Snippet {
+    width: auto;
+  }
 }
