@@ -53,7 +53,7 @@ router.get("/api/user/snippets/:id", authenticateToken, (req, res) => {
       return res.status(200).json({ snippet: data });
     })
     .catch((err) => {
-      res.status(403).json({
+      res.status(400).json({
         message: err.message || "Some error occured",
       });
     });

@@ -24,6 +24,7 @@ import "prismjs/components/prism-css";
 // import "prismjs/themes/prism.css";
 import "../assets/css/prism-okadia.css";
 import "./EditSnippet.css";
+import Error from "./Error";
 
 class EditSnippet extends Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class EditSnippet extends Component {
       language_alias: "js",
       id: props.match.params.id,
       error: null,
-      authorized: true,
+      loadError: false,
+      loadErrorMessage: "",
     };
   }
 
@@ -60,12 +62,11 @@ class EditSnippet extends Component {
         });
       })
       .catch((err) => {
-        if (err.response.status === 403) {
-          this.setState({
-            ...this.state,
-            authorized: false,
-          });
-        }
+        this.setState({
+          ...this.state,
+          loadError: true,
+          loadErrorMessage: err.response.data.message,
+        });
       });
   }
 
@@ -130,14 +131,8 @@ class EditSnippet extends Component {
     return (
       <div className="EditSnippet">
         <div className="box">
-          {!this.state.authorized ? (
-            <div className="columns is-vcentered has-text-centered pt-5">
-              <div className="column">
-                <h5 className="title is-size-4">
-                  You do not have permission to edit this Snippit
-                </h5>
-              </div>
-            </div>
+          {this.state.loadError ? (
+            <Error errorMessage={this.state.loadErrorMessage} />
           ) : (
             <form>
               <div className="field has-text-left">
