@@ -41,21 +41,23 @@ function Login(props) {
 
   return (
     <>
+    <section className="hero is-fullheight-with-navbar is-justify-content-center">
       <div className="sign-up  box has-text-centered">
         <h1 className="title">Log In</h1>
         <div className="columns is-vcentered">
           <div className="column is-half">
-            <div className="card">
-              <div className="card-content">
+            {/* <div className="card">
+              <div className="card-content"> */}
                 <p className="title">
                   “There are two hard things in computer science: cache
                   invalidation, naming things, and off-by-one errors.”
                 </p>
                 <p className="subtitle">Jeff Atwood</p>
-              </div>
-            </div>
+              {/* </div>
+            </div> */}
           </div>
           <div className="column">
+          <div className="box">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="field has-text-left">
                 <label className="label">Email</label>
@@ -89,9 +91,11 @@ function Login(props) {
                 New Here? <Link to="/signup">Sign Up</Link>
               </p>
             </form>
+            </div>
           </div>
         </div>
       </div>
+      </section>
     </>
   );
 }
