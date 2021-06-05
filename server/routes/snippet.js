@@ -24,14 +24,38 @@ let updateSnippetSchema = joi.object().keys({
   language_id: joi.number().required(),
 });
 
+// pagination 
+
+const getPagination = (page, size) => {
+  const limit = size ? size : 10;
+  const offset = page ? page * limit : 0;
+
+  return {limit, offset}
+}
+
+const getPagingData = (data, page, limit) => {
+  const {count: totalSnippits, rows: snippits} = data;
+  const currentPage = page ? page : 0;
+  const totalPages = Math.ceil(totalSnippits / limit)
+
+  return { totalSnippits, snippits, totalPages, currentPage}
+}
+
 router.get("/api/user/snippets", authenticateToken, (req, res) => {
   let user_id = req.user.id;
+  const {page, size} = req.query
+  const {limit, offset} = getPagination(page, size)
+
   db.snippet
-    .findAll({
+    .findAndCountAll({
       where: { user_id: user_id },
+      limit,
+      offset
     })
     .then((data) => {
-      return res.status(200).json({ snippets: data });
+      console.log("this is the data", data)
+      const response = getPagingData(data, page, limit)
+      return res.status(200).json({ response });
     })
     .catch((err) => {
       res.status(400).json({
@@ -139,7 +163,7 @@ router.delete("/api/user/snippets/:id", authenticateToken, async (req, res) => {
   let snippet_id = req.params.id;
 
   await db.snippet.findByPk(snippet_id).then((data) => {
-    owner_id = data.user_id;
+    let owner_id = data.user_id;
   });
 
   db.snippet
