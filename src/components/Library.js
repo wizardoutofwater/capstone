@@ -4,10 +4,14 @@ import Snippet from "./Snippet";
 import ListSnippit from "./ListSnippet";
 import { languageAlias } from "../supported-languages";
 import "./Library.css";
+import PaginationList from "./PaginationList";
 
 function Library(props) {
   const [snippetsResponse, setSnippetsResponse] = useState(null);
   const [listView, isListView] = useState(false);
+  const [totalPages, setTotalPages] = useState()
+  const [currentPage, setCurrentPage] = useState()
+
 
   useEffect(() => {
     if (!props.token) return;
@@ -16,13 +20,37 @@ function Library(props) {
       Authorization: `Bearer ${props.token}`,
     };
     axios.get("/api/user/snippets", { headers }).then((response) => {
-      setSnippetsResponse(response.data.snippets);
-    });
+      setSnippetsResponse(response.data.response.snippits);
+      setTotalPages(response.data.response.totalPages)
+      setCurrentPage(response.data.response.currentPage)
+    })
 
+  
+  
+    
     // use effect runs before props passed the token on refresh, adding the props.token as a dependency ensures the call runs once props sends the token
   }, [props.token]);
 
+  const pageList = []
+  for (let i =  1; i <= totalPages; i++) {
+    pageList.push(i)
+  }
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${props.token}`,
+    };
+    axios.get(`/api/user/snippets?page=${page - 1}`, { headers }).then((response) => {
+      console.log(response.data.response.snippits)
+      setSnippetsResponse(response.data.response.snippits);
+    })
+}
+
   const renderSnippets = () => {
+
     // if null render nothing, this will help the flashing issues
 
     if (snippetsResponse === null) {
@@ -40,6 +68,8 @@ function Library(props) {
         </div>
       );
     }
+
+
 
     if (!listView) {
       return (
@@ -103,6 +133,7 @@ function Library(props) {
       </div>
 
       {renderSnippets()}
+      <PaginationList totalPages={totalPages} currentPage={currentPage} handlePageChange={handlePageChange}/>
     </>
   );
 }
